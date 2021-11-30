@@ -1,0 +1,69 @@
+// Fonts
+
+// Bootstrap
+// @import '~bootstrap/scss/bootstrap';
+
+// Tailwind
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+// Variables
+@import 'variables';
+
+// Vue Components
+@import "../js/_components/components";
+@import '../js/app/components/components';
+@import '../js/cms/components/components';
+
+// Vue Views App
+@import '../js/app/views/views';
+@import '../js/cms/views/views';
+
+// Transitions
+@import "transititions";
+
+// Classes
+@import "classes";
+
+body {
+    background-color: #fafbfe !important;
+    font-family: $font-family-apple !important;
+
+    .state-cms {
+        .router-link-exact-active {
+            background-color: $theme_blue;
+            color: #fff;
+
+            svg {
+                color: #fff;
+            }
+
+            &:hover {
+                background-color: $theme_blue !important;
+                color: #fff !important;
+
+                svg {
+                    color: #fff !important;
+                }
+            }
+        }
+    }
+    .state-app {
+        .router-link-exact-active {
+            color: $theme_blue !important;
+        }
+    }
+}
+
+.btn-primary {
+    color: #fff;
+    background-color: purple;
+    border-color: purple;
+
+    &:hover {
+        color: #fff;
+        background-color: rgb(80, 0, 80);
+        border-color: rgb(80, 0, 80);
+    }
+}

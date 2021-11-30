@@ -1,0 +1,14 @@
+.truncate-2-lines {
+    max-height: 3.6em; /* double the size of line-height */
+    display: block;
+    text-overflow: ellipsis;
+    word-wrap: break-word;
+    overflow: hidden;
+}
+// rs = required star
+.rs {
+    color: red;
+}
+.bg-blue-theme {
+    background: $theme_blue;
+}

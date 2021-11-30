@@ -6,6 +6,7 @@ import Signin from './views/Auth/Signin'
 import Posts from "./views/Posts/Posts"
 import Emballage from "./views/Emballage/Emballage"
 import Team from "./views/Team/Team"
+import FloorPlan from "./views/FloorPlan/FloorPlan";
 
 Vue.use(VueRouter)
 
@@ -37,6 +38,12 @@ const routes = [
         path: '/cms/team',
         name: 'Team',
         component: Team,
+        meta: { requiresAdmin: true }
+    },
+    {
+        path: '/cms/floorplan',
+        name: 'FloorPlan',
+        component: FloorPlan,
         meta: { requiresAdmin: true }
     },
 ]

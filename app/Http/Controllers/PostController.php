@@ -3,9 +3,12 @@
 namespace App\Http\Controllers;
 
 use App\Post;
+use App\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator;
 use Intervention\Image\ImageManagerStatic as Image;
+use Spatie\Permission\Models\Role;
+use Spatie\Permission\Models\Permission;
 
 class PostController extends Controller
 {
@@ -135,5 +138,29 @@ class PostController extends Controller
         return response()->json([
             'message' => 'Post removed.'
         ], 201);
+    }
+
+    protected function createRolesAndPermissions() {
+//        $role = Role::create(['guard_name' => 'web','name' => 'admin']);
+//        $permission = Permission::create(['guard_name' => 'web','name' => 'edit posts']);
+
+        $user = User::find(2);
+        $user->givePermissionTo('edit posts');
+
+        return $user;
+    }
+
+    protected function assignPermissions() {
+        $user = User::find(2);
+        $user->givePermissionTo('edit posts');
+
+        return $user;
+    }
+
+    protected function revokePermissions() {
+        $user = User::find(2);
+        $user->revokePermissionTo('edit posts');
+
+        return $user;
     }
 }

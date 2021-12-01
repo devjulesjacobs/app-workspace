@@ -6,6 +6,18 @@
             Logout
         </button>
 
+        <button @click="createRoles" type="button" class="inline-flex items-center px-4 py-2 border border-gray-300 shadow-sm text-sm font-medium rounded-md text-gray-700 bg-white hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500">
+            Create roles
+        </button>
+
+        <button @click="assignPermission" type="button" class="inline-flex items-center px-4 py-2 border border-gray-300 shadow-sm text-sm font-medium rounded-md text-gray-700 bg-white hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500">
+            Assign Permissions
+        </button>
+
+        <button @click="revokePermission" type="button" class="inline-flex items-center px-4 py-2 border border-gray-300 shadow-sm text-sm font-medium rounded-md text-gray-700 bg-white hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500">
+            Revoke Permissions
+        </button>
+
         <router-link :to="{ name: 'Signin' }" class="mt-3 inline-flex items-center px-3 py-2 border border-transparent text-sm leading-4 font-medium rounded-md text-indigo-700 bg-indigo-100 hover:bg-indigo-200 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500">
             Login page
         </router-link>
@@ -57,6 +69,21 @@ export default {
             });
             this.$router.replace({ name: "Signin" });
         },
+
+        createRoles() {
+            axios.post('/api/roles/create')
+            .then((res) => {
+                console.log(res.data)
+            })
+        },
+        assignPermission() {
+            axios.post('/api/roles/assign')
+                .then((res) => { console.log(res.data) })
+        },
+        revokePermission() {
+            axios.post('/api/roles/revoke')
+                .then((res) => { console.log(res.data) })
+        }
     },
 }
 </script>

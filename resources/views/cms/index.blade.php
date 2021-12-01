@@ -19,6 +19,13 @@
     <link href="https://fonts.googleapis.com/css2?family=Material+Icons+Round" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css2?family=Material+Icons+Sharp" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css2?family=Material+Icons+Two+Tone" rel="stylesheet">
+
+    <script type="text/javascript">
+        window.Laravel = {
+            csrfToken: "{{ csrf_token() }}",
+            jsPermissions: {!! auth()->check()?auth()->user()->jsPermissions():null !!}
+        }
+    </script>
 </head>
 <body>
 

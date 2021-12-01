@@ -28,3 +28,7 @@ Route::get('/posts/latest', [\App\Http\Controllers\PostController::class, 'getLa
 Route::get('/post/{id}', [\App\Http\Controllers\PostController::class, 'show'])->middleware(['auth:sanctum']);
 Route::post('/post/{id}', [App\Http\Controllers\PostController::class, 'update'])->middleware(['auth:sanctum']);
 Route::delete('/post/{id}', [App\Http\Controllers\PostController::class, 'destroy'])->middleware(['auth:sanctum']);
+
+Route::post('/roles/create', [App\Http\Controllers\PostController::class, 'createRolesAndPermissions'])->middleware(['auth:sanctum']);
+Route::post('/roles/assign', [App\Http\Controllers\PostController::class, 'assignPermissions'])->middleware(['auth:sanctum']);
+Route::post('/roles/revoke', [App\Http\Controllers\PostController::class, 'revokePermissions'])->middleware(['auth:sanctum']);

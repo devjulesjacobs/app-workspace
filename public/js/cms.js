@@ -2371,7 +2371,6 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
 //
 //
 //
-//
 
 
 /* harmony default export */ __webpack_exports__["default"] = ({
@@ -2859,6 +2858,18 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 
 /* harmony default export */ __webpack_exports__["default"] = ({
   name: "Dashboard",
@@ -2919,6 +2930,21 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
           }
         }, _callee);
       }))();
+    },
+    createRoles: function createRoles() {
+      axios.post('/api/roles/create').then(function (res) {
+        console.log(res.data);
+      });
+    },
+    assignPermission: function assignPermission() {
+      axios.post('/api/roles/assign').then(function (res) {
+        console.log(res.data);
+      });
+    },
+    revokePermission: function revokePermission() {
+      axios.post('/api/roles/revoke').then(function (res) {
+        console.log(res.data);
+      });
     }
   })
 });
@@ -18632,6 +18658,71 @@ if ( typeof noGlobal === "undefined" ) {
 return jQuery;
 } );
 
+
+/***/ }),
+
+/***/ "./node_modules/laravel-permission-to-vuejs/index.js":
+/*!***********************************************************!*\
+  !*** ./node_modules/laravel-permission-to-vuejs/index.js ***!
+  \***********************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony default export */ __webpack_exports__["default"] = ({
+	install(Vue, options) {
+		Vue.prototype.can = function(value){
+			var permissions = window.Laravel.jsPermissions.permissions;
+			var _return = false;
+			if(!Array.isArray(permissions)){
+				return false;
+			}
+			if(value.includes('|')){
+				value.split('|').forEach(function (item) {
+					if(permissions.includes(item.trim())){
+						_return = true;
+					}
+				});
+			}else if(value.includes('&')){
+				_return = true;
+				value.split('&').forEach(function (item) {
+					if(!permissions.includes(item.trim())){
+						_return = false;
+					}
+				});
+			}else{
+				_return = permissions.includes(value.trim());
+			}
+			return _return;
+		}
+		
+		Vue.prototype.is = function(value){
+			var roles = window.Laravel.jsPermissions.roles;
+			var _return = false;
+			if(!Array.isArray(roles)){
+				return false;
+			}
+			if(value.includes('|')){
+				value.split('|').forEach(function (item) {
+					if(roles.includes(item.trim())){
+						_return = true;
+					}
+				});
+			}else if(value.includes('&')){
+				_return = true;
+				value.split('&').forEach(function (item) {
+					if(!roles.includes(item.trim())){
+						_return = false;
+					}
+				});
+			}else{
+				_return = roles.includes(value.trim());
+			}
+			return _return;
+		}
+	}
+});
 
 /***/ }),
 
@@ -41992,6 +42083,39 @@ var render = function () {
       ),
       _vm._v(" "),
       _c(
+        "button",
+        {
+          staticClass:
+            "inline-flex items-center px-4 py-2 border border-gray-300 shadow-sm text-sm font-medium rounded-md text-gray-700 bg-white hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500",
+          attrs: { type: "button" },
+          on: { click: _vm.createRoles },
+        },
+        [_vm._v("\n        Create roles\n    ")]
+      ),
+      _vm._v(" "),
+      _c(
+        "button",
+        {
+          staticClass:
+            "inline-flex items-center px-4 py-2 border border-gray-300 shadow-sm text-sm font-medium rounded-md text-gray-700 bg-white hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500",
+          attrs: { type: "button" },
+          on: { click: _vm.assignPermission },
+        },
+        [_vm._v("\n        Assign Permissions\n    ")]
+      ),
+      _vm._v(" "),
+      _c(
+        "button",
+        {
+          staticClass:
+            "inline-flex items-center px-4 py-2 border border-gray-300 shadow-sm text-sm font-medium rounded-md text-gray-700 bg-white hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500",
+          attrs: { type: "button" },
+          on: { click: _vm.revokePermission },
+        },
+        [_vm._v("\n        Revoke Permissions\n    ")]
+      ),
+      _vm._v(" "),
+      _c(
         "router-link",
         {
           staticClass:
@@ -59250,20 +59374,23 @@ __webpack_require__.r(__webpack_exports__);
 __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var vue__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! vue */ "./node_modules/vue/dist/vue.common.js");
 /* harmony import */ var vue__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(vue__WEBPACK_IMPORTED_MODULE_0__);
-/* harmony import */ var _router__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./router */ "./resources/js/cms/router.js");
-/* harmony import */ var _store__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./store */ "./resources/js/cms/store/index.js");
+/* harmony import */ var laravel_permission_to_vuejs__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! laravel-permission-to-vuejs */ "./node_modules/laravel-permission-to-vuejs/index.js");
+/* harmony import */ var _router__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./router */ "./resources/js/cms/router.js");
+/* harmony import */ var _store__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./store */ "./resources/js/cms/store/index.js");
 __webpack_require__(/*! ../bootstrap */ "./resources/js/bootstrap.js");
 
 
 
 
+
 vue__WEBPACK_IMPORTED_MODULE_0___default.a.component("Cms", __webpack_require__(/*! ./Cms.vue */ "./resources/js/cms/Cms.vue")["default"]);
-_store__WEBPACK_IMPORTED_MODULE_2__["default"].dispatch("cms/setValues").then(function () {
-  _router__WEBPACK_IMPORTED_MODULE_1__["default"].beforeEach(function (to, from, next) {
+vue__WEBPACK_IMPORTED_MODULE_0___default.a.use(laravel_permission_to_vuejs__WEBPACK_IMPORTED_MODULE_1__["default"]);
+_store__WEBPACK_IMPORTED_MODULE_3__["default"].dispatch("cms/setValues").then(function () {
+  _router__WEBPACK_IMPORTED_MODULE_2__["default"].beforeEach(function (to, from, next) {
     if (to.matched.some(function (record) {
       return record.meta.requiresAdmin;
     })) {
-      if (!_store__WEBPACK_IMPORTED_MODULE_2__["default"].getters['cms/authenticated']) {
+      if (!_store__WEBPACK_IMPORTED_MODULE_3__["default"].getters['cms/authenticated']) {
         next({
           name: 'Signin'
         });
@@ -59276,8 +59403,8 @@ _store__WEBPACK_IMPORTED_MODULE_2__["default"].dispatch("cms/setValues").then(fu
   });
   new vue__WEBPACK_IMPORTED_MODULE_0___default.a({
     el: "#app",
-    router: _router__WEBPACK_IMPORTED_MODULE_1__["default"],
-    store: _store__WEBPACK_IMPORTED_MODULE_2__["default"]
+    router: _router__WEBPACK_IMPORTED_MODULE_2__["default"],
+    store: _store__WEBPACK_IMPORTED_MODULE_3__["default"]
   });
 });
 

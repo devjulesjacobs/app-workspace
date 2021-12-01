@@ -1,9 +1,11 @@
 require("../bootstrap");
 import Vue from "vue";
+import LaravelPermissionsToVueJS from 'laravel-permission-to-vuejs'
 import router from "./router";
 import store from "./store";
 
 Vue.component("Cms", require("./Cms.vue").default);
+Vue.use(LaravelPermissionsToVueJS);
 
 store.dispatch("cms/setValues").then(() => {
 
@@ -27,3 +29,4 @@ store.dispatch("cms/setValues").then(() => {
         store,
     });
 });
+

@@ -7,12 +7,19 @@ try {
     require('bootstrap');
 } catch (e) {}
 
-
+// Laravel API
 window.axios = require('axios');
 axios.defaults.withCredentials = true;
-// axios.defaults.baseURL = "appdevelopment.app";
+axios.defaults.headers.common['X-Requested-With'] = 'XMLHttpRequest';
 
-window.axios.defaults.headers.common['X-Requested-With'] = 'XMLHttpRequest';
+// Change= Services API
+window.axiosServices = axios.create({
+    baseURL: 'https://services.change-is.com',
+    headers: {
+        'Authorization': 'Bearer '+btoa('beheer' + ':' + 'S3cure!ty')
+    },
+    withCredentials: false,
+})
 
 window.LoadingScreen = function (set) {
     const LoadingScreen = $('#LoadingScreen');

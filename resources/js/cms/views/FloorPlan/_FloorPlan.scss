@@ -23,7 +23,7 @@
                 .unit {
                     position: absolute;
                     background: #2b2b2b;
-                    opacity: 1;
+                    opacity: .8;
                     text-align: center;
                     padding: 3px;
                     padding-top: 10px;
@@ -38,6 +38,16 @@
                         transform: translate(-50%, -50%);
                         color: white;
                     }
+
+
+                    &.Pending { background: #607d8b }
+                    &.Reserved { background: #000000 }
+                    &.Available { background: green }
+                    &.On-Hold { background: orange }
+                    &.Committed { background: blue }
+                    &.Booked { background: red }
+                    &.Rented { background: #2b2b2b; opacity: 1}
+                    &.Maintenance { background: red }
                 }
             }
         }

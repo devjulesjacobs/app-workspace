@@ -59178,18 +59178,18 @@ __webpack_require__.r(__webpack_exports__);
 
 vue__WEBPACK_IMPORTED_MODULE_0___default.a.use(vue_router__WEBPACK_IMPORTED_MODULE_1__["default"]);
 var routes = [{
-  path: '/signin',
+  path: '/app/signin',
   name: 'Signin',
   component: _views_Auth_Signin__WEBPACK_IMPORTED_MODULE_3__["default"]
 }, {
-  path: '',
+  path: '/app',
   name: 'Home',
   component: _views_Home_Home__WEBPACK_IMPORTED_MODULE_2__["default"],
   meta: {
     requiresAuth: true
   }
 }, {
-  path: '/cables',
+  path: '/app/cables',
   name: 'Cables',
   component: _views_Cables_Cables__WEBPACK_IMPORTED_MODULE_4__["default"],
   meta: {
@@ -59203,14 +59203,14 @@ var routes = [{
     requiresAuth: true
   }
 }, {
-  path: '/cpr',
+  path: '/app/cpr',
   name: 'Cpr',
   component: _views_Cpr_Cpr__WEBPACK_IMPORTED_MODULE_6__["default"],
   meta: {
     requiresAuth: true
   }
 }, {
-  path: '/account',
+  path: '/app/account',
   name: 'Account',
   component: _views_Account_Account__WEBPACK_IMPORTED_MODULE_7__["default"],
   meta: {
@@ -59841,8 +59841,8 @@ window.LoadingScreen = function (set) {
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
-__webpack_require__(/*! C:\projects\workspace\resources\js\app\app.js */"./resources/js/app/app.js");
-module.exports = __webpack_require__(/*! C:\projects\workspace\resources\sass\app.scss */"./resources/sass/app.scss");
+__webpack_require__(/*! D:\development\app-workspace\resources\js\app\app.js */"./resources/js/app/app.js");
+module.exports = __webpack_require__(/*! D:\development\app-workspace\resources\sass\app.scss */"./resources/sass/app.scss");
 
 
 /***/ })

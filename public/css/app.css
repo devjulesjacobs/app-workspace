@@ -31883,14 +31883,17 @@ video {
 
 .notifications-list {
   position: fixed;
-  top: 15px;
+  top: 80px;
   right: 15px;
+  width: 400px;
   z-index: 9999999999;
 }
 
 @media screen and (max-width: 640px) {
   .notifications-list {
     left: 15px;
+    max-width: 375px;
+    width: inherit;
   }
 }
 
@@ -32179,7 +32182,7 @@ video {
      object-fit: contain;
 }
 
-.state-floorplan #floor-plan .floor-plan #imagemap {
+.state-floorplan #floor-plan .floor-plan .imagemap {
   position: absolute;
   top: 0;
   left: 0;
@@ -32187,7 +32190,7 @@ video {
   bottom: 0;
 }
 
-.state-floorplan #floor-plan .floor-plan #imagemap .unit {
+.state-floorplan #floor-plan .floor-plan .imagemap .unit {
   position: absolute;
   background: #2b2b2b;
   opacity: 1;
@@ -32197,11 +32200,11 @@ video {
   cursor: pointer;
 }
 
-.state-floorplan #floor-plan .floor-plan #imagemap .unit:hover {
+.state-floorplan #floor-plan .floor-plan .imagemap .unit:hover {
   opacity: 0.75;
 }
 
-.state-floorplan #floor-plan .floor-plan #imagemap .unit .text-temp {
+.state-floorplan #floor-plan .floor-plan .imagemap .unit .text-temp {
   position: absolute;
   top: 50%;
   left: 50%;

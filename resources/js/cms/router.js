@@ -12,36 +12,36 @@ Vue.use(VueRouter)
 
 const routes = [
     {
-        path: '/cms',
+        path: '/',
         name: 'Dashboard',
         component: Dashboard,
         meta: { requiresAdmin: true }
     },
     {
-        path: '/cms/signin',
+        path: '/signin',
         name: 'Signin',
         component: Signin
     },
     {
-        path: '/cms/posts',
+        path: '/posts',
         name: 'Posts',
         component: Posts,
         meta: { requiresAdmin: true }
     },
     {
-        path: '/cms/emballage',
+        path: '/emballage',
         name: 'Emballage',
         component: Emballage,
         meta: { requiresAdmin: true }
     },
     {
-        path: '/cms/team',
+        path: '/team',
         name: 'Team',
         component: Team,
         meta: { requiresAdmin: true }
     },
     {
-        path: '/cms/floorplan',
+        path: '/floorplan',
         name: 'FloorPlan',
         component: FloorPlan,
         meta: { requiresAdmin: true }

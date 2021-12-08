@@ -3,15 +3,6 @@
     #floor-plan {
 
         .floor-plan {
-            position: relative;
-            width: 938px;
-            height: 524px;
-
-            img {
-                width: 938px;
-                height: 524px;
-                object-fit: contain;
-            }
 
             .imagemap {
                 position: absolute;
@@ -39,15 +30,24 @@
                         color: white;
                     }
 
+                    //$sc-Pending: #4caf50;
+                    $sc-Pending: black;
+                    $sc-Reserved: gray;
+                    $sc-Available: green;
+                    $sc-On-Hold: orange;
+                    $sc-Committed: blue;
+                    $sc-Booked: red;
+                    $sc-Rented: #2b2b2b;
+                    $sc-Maintenance: red;
 
-                    &.Pending { background: #607d8b }
-                    &.Reserved { background: #000000 }
-                    &.Available { background: green }
-                    &.On-Hold { background: orange }
-                    &.Committed { background: blue }
-                    &.Booked { background: red }
-                    &.Rented { background: #2b2b2b; opacity: 1}
-                    &.Maintenance { background: red }
+                    &.Pending { background: $sc-Pending }
+                    &.Reserved { background: $sc-Reserved }
+                    &.Available { background: $sc-Available }
+                    &.On-Hold { background: $sc-On-Hold }
+                    &.Committed { background: $sc-Committed }
+                    &.Booked { background: $sc-Booked }
+                    &.Rented { background: $sc-Rented; opacity: 1}
+                    &.Maintenance { background: $sc-Maintenance }
                 }
             }
         }

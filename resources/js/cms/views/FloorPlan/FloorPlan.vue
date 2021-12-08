@@ -20,7 +20,7 @@
         <div id="floor-plan">
 
             <div v-if="views.floorplan" class="floor-plan mb-10">
-                <img :src="'/img/floorplans/ulr/ULR-'+im.floor+'-FLOOR.png'" alt="" class="shadow-xl">
+                <img :src="'/img/floorplans/ulr/Ulr-'+im.floor+'.png'" alt="" class="shadow-xl">
                 <div id="imagemap" class="imagemap">
                     <div v-for="c in im.coords" :key="c.ID" @click="getUnit(c.ID, im.location)" class="unit" :class="c.Status" :style="{ width: c.w+'px', height: c.h+'px', top: c.y+'px', left: c.x+'px' }">
                         <div class="text-temp text-sm font-bold">{{ c.Huisnummer }}</div>
@@ -30,17 +30,16 @@
 
         </div>
 
-        <div>
-            <h1 class="font-bold text-2xl">Clicked unit info</h1>
-            <div>
-                <pre>{{ unit }}</pre>
-            </div>
-        </div>
-
+        <SlideFloorPlan :show="slide.show"
+                        :unit="unit"
+                        :location="im.location"
+                        @refresh="getCoords"
+                        @hide="hideSlide()" />
     </div>
 </template>
 
 <script>
+import SlideFloorPlan from '../../components/SlideFloorPlan/SlideFloorPlan'
 
 export default {
     name: "FloorPlan",
@@ -56,6 +55,9 @@ export default {
                 index: false,
                 floors: false,
                 floorplan: true
+            },
+            slide: {
+                show: false
             }
         }
     },
@@ -83,6 +85,8 @@ export default {
         },
 
         getUnit(ID, location) {
+            this.slide.show = true;
+
             let config = {
                 params: { unit: ID, location: location }
             }
@@ -93,10 +97,28 @@ export default {
             })
             .catch((err) => { console.log(err) })
         },
+
+        hideSlide() {
+            this.slide.show = false;
+        }
+    },
+
+    components: {
+        SlideFloorPlan
     }
 }
 </script>
 
 <style scoped>
+.floor-plan {
+    position: relative;
+    width: 938px;
+    height: 524px;
+}
 
+.floor-plan img {
+    width: 938px;
+    height: 524px;
+    object-fit: contain;
+}
 </style>

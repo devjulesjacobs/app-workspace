@@ -5,8 +5,8 @@
                 <div>
                     <img class="mx-auto h-12 w-auto" src="/img/system/company-logo.png"
                          alt="Workflow">
-                    <h2 class="mt-6 text-center text-3xl font-bold text-gray-900">
-                        CMS Dashboard
+                    <h2 class="mt-6 text-center text-3xl font-medium text-gray-900">
+                        Workspace
                     </h2>
                 </div>
                 <form class="mt-8 space-y-6" method="POST" @submit.prevent="submit">
@@ -73,8 +73,8 @@ export default {
     data() {
         return {
             form: {
-                email: "admin@gmail.com",
-                password: "password",
+                email: "",
+                password: "",
             }
         }
     },

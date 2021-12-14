@@ -1,9 +1,22 @@
 <template>
-    <div class="state-floorplan">
+    <div class="state-floorplan rounded-md shadow-xl bg-white p-5">
 
-        <div class="mb-5">
-            <h1 class="text-2xl font-bold mr-4 inline-block">{{ im.location }}</h1>
-            <select v-model="im.floor" @change="getCoords" class="pl-3 pr-10 py-2 transition duration-100 ease-in-out border rounded shadow-sm focus:ring-2 focus:ring-blue-500 focus:outline-none focus:ring-opacity-50 disabled:opacity-50 disabled:cursor-not-allowed">
+        <div class="pb-5 border-b border-gray-200 sm:flex sm:items-center sm:justify-between">
+            <h3 class="ml-2 mt-2 text-lg leading-6 font-medium text-gray-900">
+                Floorplan
+            </h3>
+            <p class="ml-2 mt-1 text-sm text-gray-500 truncate">{{ im.location }}</p>
+            <div class="mt-3 flex sm:mt-0 sm:ml-4">
+                <button @click="getCoords" type="button"
+                        class="inline-flex items-center px-4 py-2 border border-gray-300 rounded-md shadow-sm text-sm font-medium text-gray-700 bg-white hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500">
+                    Refresh
+                </button>
+            </div>
+        </div>
+
+        <div class="my-5">
+            <select v-model="im.floor" @change="getCoords"
+                    class="cursor-pointer pl-3 pr-10 py-2 transition duration-100 ease-in-out border rounded shadow-sm focus:ring-2 focus:ring-blue-500 focus:outline-none focus:ring-opacity-50 disabled:opacity-50 disabled:cursor-not-allowed">
                 <option value="-2">Verdieping -2</option>
                 <option value="-1">Verdieping -1</option>
                 <option value="0">Begane grond</option>
@@ -19,10 +32,12 @@
 
         <div id="floor-plan">
 
-            <div v-if="views.floorplan" class="floor-plan mb-10">
+            <div v-if="views.floorplan" class="floor-plan mb-10 m-auto">
                 <img :src="'/img/floorplans/ulr/Ulr-'+im.floor+'.png'" alt="" class="shadow-xl">
                 <div id="imagemap" class="imagemap">
-                    <div v-for="c in im.coords" :key="c.ID" @click="getUnit(c.ID, im.location)" class="unit" :class="c.Status" :style="{ width: c.w+'px', height: c.h+'px', top: c.y+'px', left: c.x+'px' }">
+                    <div v-for="c in im.coords" :key="c.ID" @click="getUnit(c.ID, im.location)" class="unit"
+                         :class="c.Status"
+                         :style="{ width: c.w+'px', height: c.h+'px', top: c.y+'px', left: c.x+'px' }">
                         <div class="text-temp text-sm font-bold">{{ c.Huisnummer }}</div>
                     </div>
                 </div>
@@ -34,7 +49,7 @@
                         :unit="unit"
                         :location="im.location"
                         @refresh="getCoords"
-                        @hide="hideSlide()" />
+                        @hide="hideSlide()" ref="myChild"/>
     </div>
 </template>
 
@@ -47,8 +62,9 @@ export default {
         return {
             im: {
                 location: 'Utrecht Leidsche Rijn',
+                coords: null,
                 floor: 0,
-                coords: null
+                floors: ['-2', '-1', '0', '1', '2', '3', '4', '5', '6', '7'],
             },
             unit: [],
             views: {
@@ -78,24 +94,29 @@ export default {
             }
 
             axiosServices.get('/floorplangetunits', config)
-            .then((res) => {
-                app.im.coords = res.data;
-            })
-            .catch((err) => { console.log(err) })
+                .then((res) => {
+                    app.im.coords = res.data;
+                })
+                .catch((err) => {
+                    console.log(err)
+                })
         },
 
         getUnit(ID, location) {
             this.slide.show = true;
 
             let config = {
-                params: { unit: ID, location: location }
+                params: {unit: ID, location: location}
             }
 
             axiosServices.get('/unitinformation', config)
-            .then((res) => {
-                this.unit = res.data
-            })
-            .catch((err) => { console.log(err) })
+                .then((res) => {
+                    this.unit = res.data
+                    this.$refs.myChild.syncFormValues();
+                })
+                .catch((err) => {
+                    console.log(err)
+                })
         },
 
         hideSlide() {

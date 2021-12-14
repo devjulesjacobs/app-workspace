@@ -78,8 +78,8 @@ export default {
     data() {
         return {
             form: {
-                email: "jules@gmail.com",
-                password: "password",
+                email: "",
+                password: "",
             },
             views: {
                 Login: true,

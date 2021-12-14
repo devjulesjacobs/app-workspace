@@ -13,14 +13,13 @@
 
                 .unit {
                     position: absolute;
-                    background: #2b2b2b;
-                    opacity: .8;
+                    background: rgba(43, 43, 43, 0.3);
                     text-align: center;
                     padding: 3px;
                     padding-top: 10px;
                     cursor: pointer;
 
-                    &:hover { opacity: 0.75; }
+                    &:hover { opacity: 0.65; }
 
                     .text-temp {
                         position: absolute;
@@ -31,8 +30,8 @@
                     }
 
                     //$sc-Pending: #4caf50;
-                    $sc-Pending: black;
-                    $sc-Reserved: gray;
+                    $sc-Pending: rgba(43, 43, 43, 0.35);
+                    $sc-Reserved: rgba(128, 0, 128, 0.4);
                     $sc-Available: green;
                     $sc-On-Hold: orange;
                     $sc-Committed: blue;

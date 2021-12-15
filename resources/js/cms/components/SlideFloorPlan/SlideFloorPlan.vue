@@ -688,7 +688,6 @@ export default {
             form['report'] = person.report;
             form['reportApp'] = person.reportApp;
             form['BSN'] = person.BSN;
-            form['preferredUnit'] = person.preferredUnit;
 
             // User
             form['inschrijfnummer'] = person.inschrijfnummer;

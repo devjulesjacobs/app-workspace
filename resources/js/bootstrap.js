@@ -19,7 +19,7 @@ window.axiosServices = axios.create({
         'Authorization': 'Bearer '+btoa('beheer' + ':' + 'S3cure!ty')
     },
     withCredentials: false,
-})
+});
 
 window.LoadingScreen = function (set) {
     const LoadingScreen = $('#LoadingScreen');

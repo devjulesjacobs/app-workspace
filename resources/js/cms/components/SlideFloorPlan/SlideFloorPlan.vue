@@ -264,190 +264,183 @@
                                         <div v-if="slide.screen === 'rapport'">
                                             <h3 class="text-2xl font-bold mb-4 px-6">Rapport opstellen</h3>
 
-                                            <div class="sm:rounded-md sm:overflow-hidden">
-                                                <div class="px-6">
+                                            <div class="sm:overflow-hidden">
+                                                <div>
+                                                    <h3 class="text-lg font-medium text-gray-900 mb-1 bg-gray-100 px-6 py-4 mb-2"><span class="text-blue-600">1.</span> BSN controle</h3>
+                                                    <div class="px-6 mb-3">
+                                                        <div class="mt-1">
+                                                        <label class="block text-sm font-medium text-gray-700">
+                                                            BSN
+                                                        </label>
+                                                            <input v-model="form.BSN" @change="checkBSN" type="text" class="mb-2 shadow-sm p-2 focus:ring-indigo-500 focus:border-indigo-500 mt-1 block w-full sm:text-sm border border-gray-300 rounded-md" />
 
-                                                    <div class="mb-5">
+                                                        <label class="block text-sm font-medium text-gray-700">
+                                                            Nogmaals ter controle
+                                                        </label>
+                                                            <input v-model="form.BSN_check" @keyup="checkBSN" type="text" class="mb-3 shadow-sm p-2 focus:ring-indigo-500 focus:border-indigo-500 mt-1 block w-full sm:text-sm border border-gray-300 rounded-md" />
 
-                                                        <div class="mb-3">
-                                                            <h3 class="text-lg font-medium text-gray-900 mb-1"><span class="text-blue-600">1.</span> BSN controle</h3>
-                                                            <div class="mt-1">
-                                                                <h5 class="text-sm">BSN</h5>
-                                                                <input v-model="form.BSN" @change="checkBSN" type="text" class="mb-2 shadow-sm p-2 focus:ring-indigo-500 focus:border-indigo-500 mt-1 block w-full sm:text-sm border border-gray-300 rounded-md" />
-
-                                                                <h5 class="text-sm">BSN nogmaals</h5>
-                                                                <input v-model="form.BSN_check" @keyup="checkBSN" type="text" class="mb-3 shadow-sm p-2 focus:ring-indigo-500 focus:border-indigo-500 mt-1 block w-full sm:text-sm border border-gray-300 rounded-md" />
-
-                                                                <p v-if="formChecks.BSN" class="text-green-500 text-sm">
-                                                                    <svg v-if="formChecks.BSN" xmlns="http://www.w3.org/2000/svg" class="-mt-1 h-4 w-4 inline-block" viewBox="0 0 20 20" fill="currentColor">
-                                                                        <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd" />
-                                                                    </svg>
-                                                                    BSN gecontroleerd
-                                                                </p>
-                                                            </div>
+                                                            <p v-if="formChecks.BSN" class="text-green-500 text-sm">
+                                                                <svg v-if="formChecks.BSN" xmlns="http://www.w3.org/2000/svg" class="-mt-1 h-4 w-4 inline-block" viewBox="0 0 20 20" fill="currentColor">
+                                                                    <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd" />
+                                                                </svg>
+                                                                BSN gecontroleerd
+                                                            </p>
                                                         </div>
-
-                                                        <hr class="mb-4 mt-4">
-
-                                                        <h3 class="text-lg font-medium text-gray-900 mb-1"><span class="text-blue-600">2.</span> Voorkeuren</h3>
-
-                                                        <div class="grid grid-cols-2">
-                                                            <div class="flex-1 pr-3 border-r border-gray-200">
-                                                                <div class="relative flex items-start py-1">
-                                                                    <div class="min-w-0 flex-1 text-sm">
-                                                                        <label for="wilBerging" class="text-gray-700 select-none cursor-pointer" :class="{ 'text-blue-500': form.wilBerging }">Berging</label>
-                                                                    </div>
-                                                                    <div class="ml-3 flex items-center h-5">
-                                                                        <input v-model="form.wilBerging" id="wilBerging" type="checkbox" class="focus:ring-green-500 h-4 w-4 text-green-600 cursor-pointer border-gray-300 rounded">
-                                                                    </div>
-                                                                </div>
-                                                                <div class="relative flex items-start py-1">
-                                                                    <div class="min-w-0 flex-1 text-sm">
-                                                                        <label for="wilDeelAuto" class="text-gray-700 select-none cursor-pointer" :class="{ 'text-blue-500': form.wilDeelAuto }">Deelauto</label>
-                                                                    </div>
-                                                                    <div class="ml-3 flex items-center h-5">
-                                                                        <input v-model="form.wilDeelAuto" id="wilDeelAuto" type="checkbox" class="focus:ring-green-500 h-4 w-4 text-green-600 cursor-pointer border-gray-300 rounded">
-                                                                    </div>
-                                                                </div>
-                                                                <div class="relative flex items-start py-1">
-                                                                    <div class="min-w-0 flex-1 text-sm">
-                                                                        <label for="wilParkeerplaats" class="text-gray-700 select-none cursor-pointer" :class="{ 'text-blue-500': form.wilParkeerplaats }">Parkeerplaats</label>
-                                                                    </div>
-                                                                    <div class="ml-3 flex items-center h-5">
-                                                                        <input v-model="form.wilParkeerplaats" id="wilParkeerplaats" type="checkbox" class="focus:ring-green-500 h-4 w-4 text-green-600 cursor-pointer border-gray-300 rounded">
-                                                                    </div>
-                                                                </div>
-                                                                <div class="relative flex items-start py-1">
-                                                                    <div class="min-w-0 flex-1 text-sm">
-                                                                        <label for="wilParkeerplaatsElektrisch" class="text-gray-700 select-none cursor-pointer" :class="{ 'text-blue-500': form.wilParkeerplaatsElektrisch }">Parkeerplaats Elektrisch</label>
-                                                                    </div>
-                                                                    <div class="ml-3 flex items-center h-5">
-                                                                        <input v-model="form.wilParkeerplaatsElektrisch" id="wilParkeerplaatsElektrisch" type="checkbox" class="focus:ring-green-500 h-4 w-4 text-green-600 cursor-pointer border-gray-300 rounded">
-                                                                    </div>
-                                                                </div>
-                                                                <div class="relative flex items-start py-1">
-                                                                    <div class="min-w-0 flex-1 text-sm">
-                                                                        <label for="wilSamenwonen" class="text-gray-700 select-none cursor-pointer" :class="{ 'text-blue-500': form.wilSamenwonen }">Samenwonen</label>
-                                                                    </div>
-                                                                    <div class="ml-3 flex items-center h-5">
-                                                                        <input v-model="form.wilSamenwonen" id="wilSamenwonen" type="checkbox" class="focus:ring-green-500 h-4 w-4 text-green-600 cursor-pointer border-gray-300 rounded">
-                                                                    </div>
-                                                                </div>
-                                                                <div class="relative flex items-start py-1">
-                                                                    <div class="min-w-0 flex-1 text-sm">
-                                                                        <label for="wilSportAbonnement" class="text-gray-700 select-none cursor-pointer" :class="{ 'text-blue-500': form.wilSportAbonnement }">Sportabonnement</label>
-                                                                    </div>
-                                                                    <div class="ml-3 flex items-center h-5">
-                                                                        <input v-model="form.wilSportAbonnement" id="wilSportAbonnement" type="checkbox" class="focus:ring-green-500 h-4 w-4 text-green-600 cursor-pointer border-gray-300 rounded">
-                                                                    </div>
-                                                                </div>
-                                                            </div>
-                                                            <div class="flex-1 pl-3">
-                                                                <div class="relative flex items-start py-1">
-                                                                    <div class="min-w-0 flex-1 text-sm">
-                                                                        <label for="wilE_Bike" class="text-gray-700 select-none cursor-pointer" :class="{ 'text-blue-500': form.wilE_Bike }">E-Bike</label>
-                                                                    </div>
-                                                                    <div class="ml-3 flex items-center h-5">
-                                                                        <input v-model="form.wilE_Bike" id="wilE_Bike" type="checkbox" class="focus:ring-green-500 h-4 w-4 text-green-600 cursor-pointer border-gray-300 rounded">
-                                                                    </div>
-                                                                </div>
-                                                                <div class="relative flex items-start py-1">
-                                                                    <div class="min-w-0 flex-1 text-sm">
-                                                                        <label for="wilExtra_Fietsplek" class="text-gray-700 select-none cursor-pointer" :class="{ 'text-blue-500': form.wilExtra_Fietsplek }">Fietsplek</label>
-                                                                    </div>
-                                                                    <div class="ml-3 flex items-center h-5">
-                                                                        <input v-model="form.wilExtra_Fietsplek" id="wilExtra_Fietsplek" type="checkbox" class="focus:ring-green-500 h-4 w-4 text-green-600 cursor-pointer border-gray-300 rounded">
-                                                                    </div>
-                                                                </div>
-                                                                <div class="relative flex items-start py-1">
-                                                                    <div class="min-w-0 flex-1 text-sm">
-                                                                        <label for="wilScooterplek" class="text-gray-700 select-none cursor-pointer" :class="{ 'text-blue-500': form.wilScooterplek }">Scooterplek</label>
-                                                                    </div>
-                                                                    <div class="ml-3 flex items-center h-5">
-                                                                        <input v-model="form.wilScooterplek" id="wilScooterplek" type="checkbox" class="focus:ring-green-500 h-4 w-4 text-green-600 cursor-pointer border-gray-300 rounded">
-                                                                    </div>
-                                                                </div>
-                                                                <div class="relative flex items-start py-1">
-                                                                    <div class="min-w-0 flex-1 text-sm">
-                                                                        <label for="wilMotorplek" class="text-gray-700 select-none cursor-pointer" :class="{ 'text-blue-500': form.wilMotorplek }">Motorplek</label>
-                                                                    </div>
-                                                                    <div class="ml-3 flex items-center h-5">
-                                                                        <input v-model="form.wilMotorplek" id="wilMotorplek" type="checkbox" class="focus:ring-green-500 h-4 w-4 text-green-600 cursor-pointer border-gray-300 rounded">
-                                                                    </div>
-                                                                </div>
-                                                                <div class="relative flex items-start py-1">
-                                                                    <div class="min-w-0 flex-1 text-sm">
-                                                                        <label for="roker" class="text-gray-700 select-none cursor-pointer" :class="{ 'text-blue-500': form.roker }">Roker</label>
-                                                                    </div>
-                                                                    <div class="ml-3 flex items-center h-5">
-                                                                        <input v-model="form.roker" id="roker" type="checkbox" class="focus:ring-green-500 h-4 w-4 text-green-600 cursor-pointer border-gray-300 rounded">
-                                                                    </div>
-                                                                </div>
-                                                            </div>
-                                                        </div>
-
                                                     </div>
 
-                                                    <hr class="mb-4 mt-4">
+                                                    <h3 class="text-lg font-medium text-gray-900 mb-1 bg-gray-100 px-6 py-4 mb-2 mt-8"><span class="text-blue-600">2.</span> Voorkeuren</h3>
+                                                    <div class="px-6 mb-3 grid grid-cols-2">
+                                                        <div class="flex-1 pr-3 border-r border-gray-200">
+                                                            <div class="relative flex items-start py-1">
+                                                                <div class="min-w-0 flex-1 text-sm">
+                                                                    <label for="wilBerging" class="text-gray-700 select-none cursor-pointer" :class="{ 'text-blue-500': form.wilBerging }">Berging</label>
+                                                                </div>
+                                                                <div class="ml-3 flex items-center h-5">
+                                                                    <input v-model="form.wilBerging" id="wilBerging" type="checkbox" class="focus:ring-green-500 h-4 w-4 text-green-600 cursor-pointer border-gray-300 rounded">
+                                                                </div>
+                                                            </div>
+                                                            <div class="relative flex items-start py-1">
+                                                                <div class="min-w-0 flex-1 text-sm">
+                                                                    <label for="wilDeelAuto" class="text-gray-700 select-none cursor-pointer" :class="{ 'text-blue-500': form.wilDeelAuto }">Deelauto</label>
+                                                                </div>
+                                                                <div class="ml-3 flex items-center h-5">
+                                                                    <input v-model="form.wilDeelAuto" id="wilDeelAuto" type="checkbox" class="focus:ring-green-500 h-4 w-4 text-green-600 cursor-pointer border-gray-300 rounded">
+                                                                </div>
+                                                            </div>
+                                                            <div class="relative flex items-start py-1">
+                                                                <div class="min-w-0 flex-1 text-sm">
+                                                                    <label for="wilParkeerplaats" class="text-gray-700 select-none cursor-pointer" :class="{ 'text-blue-500': form.wilParkeerplaats }">Parkeerplaats</label>
+                                                                </div>
+                                                                <div class="ml-3 flex items-center h-5">
+                                                                    <input v-model="form.wilParkeerplaats" id="wilParkeerplaats" type="checkbox" class="focus:ring-green-500 h-4 w-4 text-green-600 cursor-pointer border-gray-300 rounded">
+                                                                </div>
+                                                            </div>
+                                                            <div class="relative flex items-start py-1">
+                                                                <div class="min-w-0 flex-1 text-sm">
+                                                                    <label for="wilParkeerplaatsElektrisch" class="text-gray-700 select-none cursor-pointer" :class="{ 'text-blue-500': form.wilParkeerplaatsElektrisch }">Parkeerplaats Elektrisch</label>
+                                                                </div>
+                                                                <div class="ml-3 flex items-center h-5">
+                                                                    <input v-model="form.wilParkeerplaatsElektrisch" id="wilParkeerplaatsElektrisch" type="checkbox" class="focus:ring-green-500 h-4 w-4 text-green-600 cursor-pointer border-gray-300 rounded">
+                                                                </div>
+                                                            </div>
+                                                            <div class="relative flex items-start py-1">
+                                                                <div class="min-w-0 flex-1 text-sm">
+                                                                    <label for="wilSamenwonen" class="text-gray-700 select-none cursor-pointer" :class="{ 'text-blue-500': form.wilSamenwonen }">Samenwonen</label>
+                                                                </div>
+                                                                <div class="ml-3 flex items-center h-5">
+                                                                    <input v-model="form.wilSamenwonen" id="wilSamenwonen" type="checkbox" class="focus:ring-green-500 h-4 w-4 text-green-600 cursor-pointer border-gray-300 rounded">
+                                                                </div>
+                                                            </div>
+                                                            <div class="relative flex items-start py-1">
+                                                                <div class="min-w-0 flex-1 text-sm">
+                                                                    <label for="wilSportAbonnement" class="text-gray-700 select-none cursor-pointer" :class="{ 'text-blue-500': form.wilSportAbonnement }">Sportabonnement</label>
+                                                                </div>
+                                                                <div class="ml-3 flex items-center h-5">
+                                                                    <input v-model="form.wilSportAbonnement" id="wilSportAbonnement" type="checkbox" class="focus:ring-green-500 h-4 w-4 text-green-600 cursor-pointer border-gray-300 rounded">
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                        <div class="flex-1 pl-3">
+                                                            <div class="relative flex items-start py-1">
+                                                                <div class="min-w-0 flex-1 text-sm">
+                                                                    <label for="wilE_Bike" class="text-gray-700 select-none cursor-pointer" :class="{ 'text-blue-500': form.wilE_Bike }">E-Bike</label>
+                                                                </div>
+                                                                <div class="ml-3 flex items-center h-5">
+                                                                    <input v-model="form.wilE_Bike" id="wilE_Bike" type="checkbox" class="focus:ring-green-500 h-4 w-4 text-green-600 cursor-pointer border-gray-300 rounded">
+                                                                </div>
+                                                            </div>
+                                                            <div class="relative flex items-start py-1">
+                                                                <div class="min-w-0 flex-1 text-sm">
+                                                                    <label for="wilExtra_Fietsplek" class="text-gray-700 select-none cursor-pointer" :class="{ 'text-blue-500': form.wilExtra_Fietsplek }">Fietsplek</label>
+                                                                </div>
+                                                                <div class="ml-3 flex items-center h-5">
+                                                                    <input v-model="form.wilExtra_Fietsplek" id="wilExtra_Fietsplek" type="checkbox" class="focus:ring-green-500 h-4 w-4 text-green-600 cursor-pointer border-gray-300 rounded">
+                                                                </div>
+                                                            </div>
+                                                            <div class="relative flex items-start py-1">
+                                                                <div class="min-w-0 flex-1 text-sm">
+                                                                    <label for="wilScooterplek" class="text-gray-700 select-none cursor-pointer" :class="{ 'text-blue-500': form.wilScooterplek }">Scooterplek</label>
+                                                                </div>
+                                                                <div class="ml-3 flex items-center h-5">
+                                                                    <input v-model="form.wilScooterplek" id="wilScooterplek" type="checkbox" class="focus:ring-green-500 h-4 w-4 text-green-600 cursor-pointer border-gray-300 rounded">
+                                                                </div>
+                                                            </div>
+                                                            <div class="relative flex items-start py-1">
+                                                                <div class="min-w-0 flex-1 text-sm">
+                                                                    <label for="wilMotorplek" class="text-gray-700 select-none cursor-pointer" :class="{ 'text-blue-500': form.wilMotorplek }">Motorplek</label>
+                                                                </div>
+                                                                <div class="ml-3 flex items-center h-5">
+                                                                    <input v-model="form.wilMotorplek" id="wilMotorplek" type="checkbox" class="focus:ring-green-500 h-4 w-4 text-green-600 cursor-pointer border-gray-300 rounded">
+                                                                </div>
+                                                            </div>
+                                                            <div class="relative flex items-start py-1">
+                                                                <div class="min-w-0 flex-1 text-sm">
+                                                                    <label for="roker" class="text-gray-700 select-none cursor-pointer" :class="{ 'text-blue-500': form.roker }">Roker</label>
+                                                                </div>
+                                                                <div class="ml-3 flex items-center h-5">
+                                                                    <input v-model="form.roker" id="roker" type="checkbox" class="focus:ring-green-500 h-4 w-4 text-green-600 cursor-pointer border-gray-300 rounded">
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
 
-                                                    <h3 class="text-lg font-medium text-gray-900 mb-1"><span class="text-blue-600">3.</span> Studio bepaling</h3>
-                                                    <h5 class="text-sm">Studio voorkeur</h5>
-                                                    <input v-model="form.preferredUnit" type="text" class="mb-2 shadow-sm p-2 focus:ring-indigo-500 focus:border-indigo-500 mt-1 block w-full sm:text-sm border border-gray-300 rounded-md" />
+                                                    <h3 class="text-lg font-medium text-gray-900 mb-1 bg-gray-100 px-6 py-4 mb-2 mt-8"><span class="text-blue-600">3.</span> Studio bepaling</h3>
+                                                    <div class="px-6 mb-3">
+                                                        <label class="block text-sm font-medium text-gray-700">
+                                                            Studio voorkeur
+                                                        </label>
+                                                        <input v-model="form.preferredUnit" type="text" class="mb-2 shadow-sm p-2 focus:ring-indigo-500 focus:border-indigo-500 mt-1 block w-full sm:text-sm border border-gray-300 rounded-md" />
+                                                    </div>
 
-                                                    <hr class="mb-4 mt-4">
-
-                                                    <h3 class="text-lg font-medium text-gray-900 mb-1"><span class="text-blue-600">4.</span> Verslag</h3>
-
-                                                    <div class="mb-3">
+                                                    <h3 class="text-lg font-medium text-gray-900 mb-1 bg-gray-100 px-6 py-4 mb-2 mt-8"><span class="text-blue-600">4.</span> Verslag</h3>
+                                                    <div class="px-6 mb-3">
                                                         <label class="block text-sm font-medium text-gray-700">
                                                             Verslag
                                                         </label>
-                                                        <div class="mt-1">
-                                                            <textarea v-model="form.report" rows="3" class="shadow-sm p-3 focus:ring-indigo-500 focus:border-indigo-500 mt-1 block w-full sm:text-sm border border-gray-300 rounded-md"></textarea>
+                                                        <div class="mt-1 mb-3">
+                                                            <textarea v-model="form.report" rows="6" class="shadow-sm p-3 focus:ring-indigo-500 focus:border-indigo-500 mt-1 block w-full sm:text-sm border border-gray-300 rounded-md"></textarea>
                                                         </div>
-                                                    </div>
 
-                                                    <div class="mb-3">
                                                         <label class="block text-sm font-medium text-gray-700">
-                                                            Opmerking over bewonersapp
+                                                            Beoordeling Bewonersapp
                                                         </label>
                                                         <div class="mt-1">
                                                             <textarea v-model="form.reportApp" rows="3" class="shadow-sm p-3 focus:ring-indigo-500 focus:border-indigo-500 mt-1 block w-full sm:text-sm border border-gray-300 rounded-md"></textarea>
                                                         </div>
                                                     </div>
 
-                                                    <hr class="mb-4 mt-4">
+                                                    <h3 class="text-lg font-medium text-gray-900 mb-1 bg-gray-100 px-6 py-4 mb-2 mt-8"><span class="text-blue-600">5.</span> Afronden</h3>
 
-                                                    <h3 class="text-lg font-medium text-gray-900 mb-3"><span class="text-blue-600">5.</span> Afronden</h3>
-
-                                                    <div class="mb-4">
+                                                    <div class="px-6 mb-6">
                                                         <label  class="block text-sm font-medium text-gray-700">Match</label>
-                                                        <select v-model="form.match" name="location" class="mb-2 shadow-sm p-2 focus:ring-indigo-500 focus:border-indigo-500 mt-1 block w-full sm:text-sm border border-gray-300 rounded-md">
+                                                        <select v-model="form.match" name="location" class="mb-4 shadow-sm p-2 focus:ring-indigo-500 focus:border-indigo-500 mt-1 block w-full sm:text-sm border border-gray-300 rounded-md">
                                                             <option value="" disabled selected>Selecteer een match score</option>
-                                                            <option v-for="option in person.match" :value="option.id">{{ option.id }}</option>
+                                                            <option v-for="option in meta.match" :value="option">{{ option }}</option>
                                                         </select>
-                                                    </div>
-                                                    <div class="mb-4">
+
                                                         <label  class="block text-sm font-medium text-gray-700">Case handler</label>
                                                         <select v-model="form.handler" name="location" class="mb-2 shadow-sm p-2 focus:ring-indigo-500 focus:border-indigo-500 mt-1 block w-full sm:text-sm border border-gray-300 rounded-md">
                                                             <option value="" disabled selected>Selecteer een handler</option>
-                                                            <option v-for="option in person.handler" :value="option.id">{{ option.id }}</option>
+                                                            <option v-for="option in meta.handler" :value="option">{{ option }}</option>
                                                         </select>
                                                     </div>
 
-                                                    <div class="mb-4" v-if="errors.length">
+                                                    <div class="px-6 mb-4" v-if="errors.length">
                                                         <p class="font-medium">Fouten gevonden in formulier:</p>
                                                         <ul>
-                                                            <li v-for="error in errors" class="text-red-700 text-sm">{{ error }}</li>
+                                                            <li v-for="error in errors" class="text-red-600 text-sm">{{ error }}</li>
                                                         </ul>
                                                     </div>
 
-                                                    <div class="inline-block">
+                                                    <div class="px-6 inline-block">
                                                         <button @click="setSlideScreen('info')" type="button" class="mb-5 inline-flex items-center px-4 py-2 border border-gray-300 shadow-sm text-sm font-medium rounded-md text-gray-700 bg-white hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500">
                                                             Terug
                                                         </button>
-                                                        <button @click="sendReport" type="button" class="mb-5 inline-flex items-center px-4 py-2 border border-gray-300 shadow-sm text-sm font-medium rounded-md text-gray-700 bg-white hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500">
-                                                            Afronden
+<!--                                                        <button @click="sendReport" type="button" class="mb-5 inline-flex items-center px-4 py-2 border border-gray-300 shadow-sm text-sm font-medium rounded-md text-gray-700 bg-white hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500">-->
+<!--                                                            Afronden-->
+<!--                                                        </button>-->
+                                                        <button @click="sendReport" type="button" class="inline-flex items-center px-3 py-2 border border-transparent text-sm leading-4 font-medium rounded-md shadow-sm text-white bg-blue-theme hover:bg-blue-theme focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500">
+                                                            Indienen
                                                         </button>
                                                         <span v-if="loading">
                                                             <div class="spinner-border -mt-3 ml-2 mr-1 animate-spin inline-block w-6 h-6 border-4 rounded-full" role="status" style="border-right-color: #2C55A2"></div>
@@ -465,7 +458,7 @@
                                 <div class="flex-1">
                                     <div class="px-6">
                                         <h3 class="text-2xl font-bold">Studio overzicht</h3>
-                                        <p class="mb-4 text-sm">{{ unit.Subtype + ' ' + unit.ID + ' op verdieping ' + unit.Verdieping }}</p>
+                                        <p class="mb-4 text-sm">{{ unit.Subtype }} <span class="text-blue-800">{{ unit.ID }}</span> op verdieping {{ unit.Verdieping }}</p>
                                     </div>
 
                                     <hr class="mb-2">
@@ -496,7 +489,7 @@
                                         <dt class="text-sm font-medium text-gray-500">
                                             Oppervlakte
                                         </dt>
-                                        <dd class="mt-1 text-sm text-gray-900 text-gray-900">
+                                        <dd class="mt-1 text-sm text-gray-900">
                                             {{ unit.Oppervlak + ' m²' }}
                                         </dd>
                                     </div>
@@ -507,7 +500,7 @@
                                         <dt class="text-sm font-medium text-gray-500">
                                             Type woning
                                         </dt>
-                                        <dd class="mt-1 text-sm text-gray-900 text-gray-900">
+                                        <dd class="mt-1 text-sm text-gray-900">
                                             {{ unit.Subtype }}
                                         </dd>
                                     </div>
@@ -518,8 +511,20 @@
                                         <dt class="text-sm font-medium text-gray-500">
                                             Balkon
                                         </dt>
-                                        <dd class="mt-1 text-sm text-gray-900 text-gray-900">
+                                        <dd class="mt-1 text-sm text-gray-900">
                                             {{ unit.Balkon ? 'Ja' : 'Nee' }}
+                                        </dd>
+                                    </div>
+
+                                    <hr class="mb-2">
+
+                                    <div class="sm:col-span-1 mb-3 px-6">
+                                        <dt class="text-sm font-medium text-gray-500">
+                                            Studio ID
+                                        </dt>
+                                        <dd class="mt-1 text-sm text-gray-900">
+                                            {{ unit.ID }}
+                                            <p class="text-xs font-normal text-gray-400">Gebruik dit ID bij Studio bepaling</p>
                                         </dd>
                                     </div>
 
@@ -549,7 +554,7 @@ export default {
                 startupMessage: true
             },
             slide: {
-                screen: 'info'
+                screen: 'rapport'
             },
             form: {
                 wilBerging: false,
@@ -578,6 +583,22 @@ export default {
             },
             errors: [],
             loading: false,
+            meta: {
+                match: [
+                    "Onvoldoende",
+                    "Voldoende",
+                    "Goed"
+                ],
+                handler: [
+                    "Channety W.",
+                    "Chermaine Z.",
+                    "Elysha R.",
+                    "Jay G.",
+                    "Judith P.",
+                    "Mishayne P.",
+                    "Lieke v.G."
+                ]
+            }
         }
     },
     mounted() {
@@ -683,6 +704,11 @@ export default {
             form['wilScooterplek'] = person.wilScooterplek;
             form['wilMotorplek'] = person.wilMotorplek;
             form['roker'] = person.roker;
+            form['match'] = person.match;
+            form['handler'] = person.handler;
+
+            // Unit
+            form['preferredUnit'] = person.preferredUnit;
 
             // Other fields
             form['report'] = person.report;
@@ -691,9 +717,6 @@ export default {
 
             // User
             form['inschrijfnummer'] = person.inschrijfnummer;
-
-            // Unit
-            form['preferredUnit'] = this.unit.ID;
         },
         getUserInfo() {
             axiosServices.get('/floorplan/accountinfo', {
@@ -716,6 +739,10 @@ export default {
                 this.views.person = false
                 this.views.startupMessage = false
             })
+        },
+
+        getMeta() {
+            axiosDev.get('')
         }
     },
     props: ['unit', 'location', 'show']

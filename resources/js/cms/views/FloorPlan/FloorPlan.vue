@@ -7,7 +7,7 @@
             </h3>
             <p class="ml-2 mt-1 text-sm text-gray-500 truncate">{{ im.location }}</p>
             <div class="mt-3 flex sm:mt-0 sm:ml-4">
-                <button @click="getCoords" type="button"
+                <button @click="refreshCoords" type="button"
                         class="inline-flex items-center px-4 py-2 border border-gray-300 rounded-md shadow-sm text-sm font-medium text-gray-700 bg-white hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500">
                     Refresh
                 </button>
@@ -95,6 +95,21 @@ export default {
             axiosServices.get('/floorplangetunits', config)
                 .then((res) => { app.im.coords = res.data })
                 .catch((err) => { console.log(err) })
+        },
+
+        refreshCoords() {
+            this.im.coords = null;
+            this.getCoords();
+
+            let app  = this;
+
+            setTimeout(function () {
+                app.$store.dispatch('cms/addNotification', {
+                    type: 'success',
+                    title: 'Floorplan Refreshed',
+                    timer: 2500
+                })
+            }, 200)
         },
 
         getUnit(ID, location) {

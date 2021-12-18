@@ -30,428 +30,439 @@
                             <div class="grid grid-cols-2">
 
                                 <div class="flex-1 border-r border-gray-200 min-h-screen overflow-x-hidden">
-                                    <div>
-                                        <div v-if="slide.screen === 'info'">
+                                    <div v-if="slide.screen === 'info'">
 
-                                            <h3 class="text-2xl font-bold mb-4 px-6">Persoonsinformatie</h3>
+                                        <h3 class="text-2xl font-bold mb-4 px-6">Persoonsinformatie</h3>
 
-                                            <div class="mb-5 px-6">
-                                                <label class="block text-sm font-medium text-gray-700">
-                                                    Inschrijfnummer of emailadres
-                                                </label>
-                                                <div class="mt-1">
-                                                    <input @change="getUserInfo" v-model="search" type="text" required class="appearance-none block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm placeholder-gray-400 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm">
-                                                </div>
-                                            </div>
-
-                                            <hr class="mb-5">
-                                            <div v-if="views.person">
-                                                <div class="mb-3 px-6">
-                                                    <div class="flex">
-                                                        <div class="mr-4 flex-shrink-0 self-center">
-                                                      <span class="inline-block h-14 w-14 rounded-full overflow-hidden bg-gray-100">
-                                                        <svg v-if="person.picture === 'null'" class="h-full w-full text-gray-300" fill="currentColor" viewBox="0 0 24 24">
-                                                          <path d="M24 20.993V24H0v-2.996A14.977 14.977 0 0112.004 15c4.904 0 9.26 2.354 11.996 5.993zM16.002 8.999a4 4 0 11-8 0 4 4 0 018 0z" />
-                                                        </svg>
-                                                        <img v-if="person.picture !== 'null'" class="object-center object-cover inline-block h-14 w-14 rounded-md" :src="person.picture" alt="" />
-                                                      </span>
-                                                        </div>
-                                                        <div>
-                                                            <p class="font-bold mt-1">{{ person.naam }}</p>
-                                                            <a class="text-blue-600 text-sm" :href="'mailto:'+person.email">{{ person.email }}</a>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                                <div>
-                                                    <hr class="mb-2">
-
-                                                    <div class="grid grid-cols-2">
-                                                        <div class="flex-1 mb-3 px-6">
-                                                            <dt class="text-sm font-medium text-gray-500">
-                                                                Beroep
-                                                            </dt>
-                                                            <dd class="mt-1 text-sm text-gray-900 text-gray-900">
-                                                                {{ person.beroep }}
-                                                            </dd>
-                                                        </div>
-                                                        <div class="flex-1 mb-3 px-6">
-                                                            <dt class="text-sm font-medium text-gray-500">
-                                                                Opleiding
-                                                            </dt>
-                                                            <dd class="mt-1 text-sm text-gray-900 text-gray-900">
-                                                                {{ person.opleiding }}
-                                                            </dd>
-                                                        </div>
-                                                    </div>
-
-                                                    <div class="grid grid-cols-2">
-                                                        <div class="flex-1 mb-3 px-6">
-                                                            <dt class="text-sm font-medium text-gray-500">
-                                                                Telefoon
-                                                            </dt>
-                                                            <a :href="'tel:'+person.telefoon" class="mt-1 text-sm text-blue-600 hover:text-blue-800 text-gray-900">
-                                                                {{ person.telefoon }}
-                                                            </a>
-                                                        </div>
-                                                        <div class="flex-1 mb-3 px-6">
-                                                            <dt class="text-sm font-medium text-gray-500">
-                                                                Mobiel
-                                                            </dt>
-                                                            <a :href="'tel:'+person.mobiel" class="mt-1 text-sm text-blue-600 hover:text-blue-800 text-gray-900">
-                                                                {{ person.mobiel }}
-                                                            </a>
-                                                        </div>
-                                                    </div>
-
-                                                    <hr class="mb-2">
-
-                                                    <div class="grid grid-cols-1">
-                                                        <div class="flex-1 mb-3 px-6">
-                                                            <dt class="text-sm font-medium text-gray-500">
-                                                                Voorkeuren
-                                                            </dt>
-                                                            <dd class="mt-1 text-sm text-gray-900 text-gray-900">
-
-                                                                <div class="grid grid-cols-2">
-                                                                    <div class="flex-1 border-r border-gray-200">
-                                                                        <div>
-                                                                            <svg v-show="person.wilBerging" xmlns="http://www.w3.org/2000/svg" class="-mt-1 h-5 w-5 text-green-600 inline-block" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                                                                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" />
-                                                                            </svg>
-                                                                            <svg v-show="!person.wilBerging" xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 -mt-1 inline-block text-gray-400" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                                                                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" />
-                                                                            </svg>
-                                                                            Berging
-                                                                        </div>
-                                                                        <div>
-                                                                            <svg v-show="person.wilDeelAuto" xmlns="http://www.w3.org/2000/svg" class="-mt-1 h-5 w-5 text-green-600 inline-block" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                                                                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" />
-                                                                            </svg>
-                                                                            <svg v-show="!person.wilDeelAuto" xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 -mt-1 inline-block text-gray-400" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                                                                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" />
-                                                                            </svg>
-                                                                            Deelauto
-                                                                        </div>
-                                                                        <div>
-                                                                            <svg v-show="person.wilParkeerplaats" xmlns="http://www.w3.org/2000/svg" class="-mt-1 h-5 w-5 text-green-600 inline-block" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                                                                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" />
-                                                                            </svg>
-                                                                            <svg v-show="!person.wilParkeerplaats" xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 -mt-1 inline-block text-gray-400" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                                                                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" />
-                                                                            </svg>
-                                                                            Parkeerplaats
-                                                                        </div>
-                                                                        <div>
-                                                                            <svg v-show="person.wilParkeerplaatsElektrisch" xmlns="http://www.w3.org/2000/svg" class="-mt-1 h-5 w-5 text-green-600 inline-block" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                                                                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" />
-                                                                            </svg>
-                                                                            <svg v-show="!person.wilParkeerplaatsElektrisch" xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 -mt-1 inline-block text-gray-400" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                                                                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" />
-                                                                            </svg>
-                                                                            Elekertische parkeerplaats
-                                                                        </div>
-                                                                        <div>
-                                                                            <svg v-show="person.wilSamenwonen" xmlns="http://www.w3.org/2000/svg" class="-mt-1 h-5 w-5 text-green-600 inline-block" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                                                                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" />
-                                                                            </svg>
-                                                                            <svg v-show="!person.wilSamenwonen" xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 -mt-1 inline-block text-gray-400" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                                                                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" />
-                                                                            </svg>
-                                                                            Samenwonen
-                                                                        </div>
-                                                                        <div>
-                                                                            <svg v-show="person.wilSportAbonnement" xmlns="http://www.w3.org/2000/svg" class="-mt-1 h-5 w-5 text-green-600 inline-block" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                                                                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" />
-                                                                            </svg>
-                                                                            <svg v-show="!person.wilSportAbonnement" xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 -mt-1 inline-block text-gray-400" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                                                                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" />
-                                                                            </svg>
-                                                                            Sport abonnement
-                                                                        </div>
-                                                                    </div>
-                                                                    <div class="flex-1 pl-3">
-                                                                        <div>
-                                                                            <svg v-show="person.wilE_Bike" xmlns="http://www.w3.org/2000/svg" class="-mt-1 h-5 w-5 text-green-600 inline-block" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                                                                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" />
-                                                                            </svg>
-                                                                            <svg v-show="!person.wilE_Bike" xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 -mt-1 inline-block text-gray-400" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                                                                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" />
-                                                                            </svg>
-                                                                            E-Bike
-                                                                        </div>
-                                                                        <div>
-                                                                            <svg v-show="person.wilExtra_Fietsplek" xmlns="http://www.w3.org/2000/svg" class="-mt-1 h-5 w-5 text-green-600 inline-block" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                                                                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" />
-                                                                            </svg>
-                                                                            <svg v-show="!person.wilExtra_Fietsplek" xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 -mt-1 inline-block text-gray-400" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                                                                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" />
-                                                                            </svg>
-                                                                            Extra Fietsplek
-                                                                        </div>
-                                                                        <div>
-                                                                            <svg v-show="person.wilScooterplek" xmlns="http://www.w3.org/2000/svg" class="-mt-1 h-5 w-5 text-green-600 inline-block" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                                                                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" />
-                                                                            </svg>
-                                                                            <svg v-show="!person.wilScooterplek" xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 -mt-1 inline-block text-gray-400" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                                                                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" />
-                                                                            </svg>
-                                                                            Scooterplek
-                                                                        </div>
-                                                                        <div>
-                                                                            <svg v-show="person.wilMotorplek" xmlns="http://www.w3.org/2000/svg" class="-mt-1 h-5 w-5 text-green-600 inline-block" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                                                                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" />
-                                                                            </svg>
-                                                                            <svg v-show="!person.wilMotorplek" xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 -mt-1 inline-block text-gray-400" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                                                                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" />
-                                                                            </svg>
-                                                                            Motorplek
-                                                                        </div>
-                                                                        <div>
-                                                                            <svg v-show="person.roker" xmlns="http://www.w3.org/2000/svg" class="-mt-1 h-5 w-5 text-green-600 inline-block" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                                                                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" />
-                                                                            </svg>
-                                                                            <svg v-show="!person.roker" xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 -mt-1 inline-block text-gray-400" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                                                                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" />
-                                                                            </svg>
-                                                                            Roker
-                                                                        </div>
-                                                                    </div>
-                                                                </div>
-                                                            </dd>
-                                                        </div>
-                                                    </div>
-
-                                                    <hr class="mb-2">
-
-                                                    <div class="grid grid-cols-1">
-                                                        <div class="flex-1 mb-3 px-6">
-                                                            <dt class="text-sm font-medium text-gray-500">
-                                                                Motivatie
-                                                            </dt>
-                                                            <dd class="mt-1 text-sm text-gray-900 text-gray-900">
-                                                                {{ person.motivatie }}
-                                                            </dd>
-                                                        </div>
-                                                    </div>
-
-                                                    <hr class="mb-2">
-
-                                                    <div class="grid grid-cols-1">
-                                                        <div class="flex-1 mb-3 px-6">
-                                                            <dt class="text-sm font-medium text-gray-500">
-                                                                Afronden
-                                                            </dt>
-                                                            <dd class="mt-1">
-                                                                <button @click.prevent="setSlideScreen('rapport')" type="button" class="mt-1 inline-flex items-center px-4 py-2 border border-transparent text-sm font-medium rounded-md shadow-sm text-white bg-blue-theme hover:bg-blue-800 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500">
-                                                                    Rapport opstellen
-                                                                </button>
-                                                            </dd>
-                                                        </div>
-                                                    </div>
-
-                                                </div>
-                                            </div>
-
-                                            <div v-if="views.startupMessage" class="text-center mx-5 text-sm text-gray-500 p-5 bg-gray-100 rounded">
-                                                Zoek een persoon op inschrijfnummer of emailadres
-                                            </div>
-
-                                            <div v-if="error !== null" class="text-center mx-5 text-sm text-red-800 p-5 bg-red-50 rounded">
-                                                {{ error }}
+                                        <div class="mb-5 px-6">
+                                            <label class="block text-sm font-medium text-gray-700">
+                                                Inschrijfnummer of emailadres
+                                            </label>
+                                            <div class="mt-1">
+                                                <input @change="getUserInfo" v-model="search" type="text" required class="appearance-none block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm placeholder-gray-400 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm">
                                             </div>
                                         </div>
 
-                                        <div v-if="slide.screen === 'rapport'">
-                                            <h3 class="text-2xl font-bold mb-4 px-6">Rapport opstellen</h3>
-
-                                            <div class="sm:overflow-hidden">
-                                                <div>
-                                                    <h3 class="text-lg font-medium text-gray-900 mb-1 bg-gray-100 px-6 py-4 mb-2"><span class="text-blue-600">1.</span> BSN controle</h3>
-                                                    <div class="px-6 mb-3">
-                                                        <div class="mt-1">
-                                                        <label class="block text-sm font-medium text-gray-700">
-                                                            BSN
-                                                        </label>
-                                                            <input v-model="form.BSN" @change="checkBSN" type="text" class="mb-2 shadow-sm p-2 focus:ring-indigo-500 focus:border-indigo-500 mt-1 block w-full sm:text-sm border border-gray-300 rounded-md" />
-
-                                                        <label class="block text-sm font-medium text-gray-700">
-                                                            Nogmaals ter controle
-                                                        </label>
-                                                            <input v-model="form.BSN_check" @keyup="checkBSN" type="text" class="mb-3 shadow-sm p-2 focus:ring-indigo-500 focus:border-indigo-500 mt-1 block w-full sm:text-sm border border-gray-300 rounded-md" />
-
-                                                            <p v-if="formChecks.BSN" class="text-green-500 text-sm">
-                                                                <svg v-if="formChecks.BSN" xmlns="http://www.w3.org/2000/svg" class="-mt-1 h-4 w-4 inline-block" viewBox="0 0 20 20" fill="currentColor">
-                                                                    <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd" />
-                                                                </svg>
-                                                                BSN gecontroleerd
-                                                            </p>
-                                                        </div>
+                                        <hr class="mb-5">
+                                        <div v-if="views.person">
+                                            <div class="mb-3 px-6">
+                                                <div class="flex">
+                                                    <div class="mr-4 flex-shrink-0 self-center">
+                                                  <span class="inline-block h-14 w-14 rounded-full overflow-hidden bg-gray-100">
+                                                    <svg v-if="person.picture === 'null'" class="h-full w-full text-gray-300" fill="currentColor" viewBox="0 0 24 24">
+                                                      <path d="M24 20.993V24H0v-2.996A14.977 14.977 0 0112.004 15c4.904 0 9.26 2.354 11.996 5.993zM16.002 8.999a4 4 0 11-8 0 4 4 0 018 0z" />
+                                                    </svg>
+                                                    <img v-if="person.picture !== 'null'" class="object-center object-cover inline-block h-14 w-14 rounded-md" :src="person.picture" alt="" />
+                                                  </span>
                                                     </div>
-
-                                                    <h3 class="text-lg font-medium text-gray-900 mb-1 bg-gray-100 px-6 py-4 mb-2 mt-8"><span class="text-blue-600">2.</span> Voorkeuren</h3>
-                                                    <div class="px-6 mb-3 grid grid-cols-2">
-                                                        <div class="flex-1 pr-3 border-r border-gray-200">
-                                                            <div class="relative flex items-start py-1">
-                                                                <div class="min-w-0 flex-1 text-sm">
-                                                                    <label for="wilBerging" class="text-gray-700 select-none cursor-pointer" :class="{ 'text-blue-500': form.wilBerging }">Berging</label>
-                                                                </div>
-                                                                <div class="ml-3 flex items-center h-5">
-                                                                    <input v-model="form.wilBerging" id="wilBerging" type="checkbox" class="focus:ring-green-500 h-4 w-4 text-green-600 cursor-pointer border-gray-300 rounded">
-                                                                </div>
-                                                            </div>
-                                                            <div class="relative flex items-start py-1">
-                                                                <div class="min-w-0 flex-1 text-sm">
-                                                                    <label for="wilDeelAuto" class="text-gray-700 select-none cursor-pointer" :class="{ 'text-blue-500': form.wilDeelAuto }">Deelauto</label>
-                                                                </div>
-                                                                <div class="ml-3 flex items-center h-5">
-                                                                    <input v-model="form.wilDeelAuto" id="wilDeelAuto" type="checkbox" class="focus:ring-green-500 h-4 w-4 text-green-600 cursor-pointer border-gray-300 rounded">
-                                                                </div>
-                                                            </div>
-                                                            <div class="relative flex items-start py-1">
-                                                                <div class="min-w-0 flex-1 text-sm">
-                                                                    <label for="wilParkeerplaats" class="text-gray-700 select-none cursor-pointer" :class="{ 'text-blue-500': form.wilParkeerplaats }">Parkeerplaats</label>
-                                                                </div>
-                                                                <div class="ml-3 flex items-center h-5">
-                                                                    <input v-model="form.wilParkeerplaats" id="wilParkeerplaats" type="checkbox" class="focus:ring-green-500 h-4 w-4 text-green-600 cursor-pointer border-gray-300 rounded">
-                                                                </div>
-                                                            </div>
-                                                            <div class="relative flex items-start py-1">
-                                                                <div class="min-w-0 flex-1 text-sm">
-                                                                    <label for="wilParkeerplaatsElektrisch" class="text-gray-700 select-none cursor-pointer" :class="{ 'text-blue-500': form.wilParkeerplaatsElektrisch }">Parkeerplaats Elektrisch</label>
-                                                                </div>
-                                                                <div class="ml-3 flex items-center h-5">
-                                                                    <input v-model="form.wilParkeerplaatsElektrisch" id="wilParkeerplaatsElektrisch" type="checkbox" class="focus:ring-green-500 h-4 w-4 text-green-600 cursor-pointer border-gray-300 rounded">
-                                                                </div>
-                                                            </div>
-                                                            <div class="relative flex items-start py-1">
-                                                                <div class="min-w-0 flex-1 text-sm">
-                                                                    <label for="wilSamenwonen" class="text-gray-700 select-none cursor-pointer" :class="{ 'text-blue-500': form.wilSamenwonen }">Samenwonen</label>
-                                                                </div>
-                                                                <div class="ml-3 flex items-center h-5">
-                                                                    <input v-model="form.wilSamenwonen" id="wilSamenwonen" type="checkbox" class="focus:ring-green-500 h-4 w-4 text-green-600 cursor-pointer border-gray-300 rounded">
-                                                                </div>
-                                                            </div>
-                                                            <div class="relative flex items-start py-1">
-                                                                <div class="min-w-0 flex-1 text-sm">
-                                                                    <label for="wilSportAbonnement" class="text-gray-700 select-none cursor-pointer" :class="{ 'text-blue-500': form.wilSportAbonnement }">Sportabonnement</label>
-                                                                </div>
-                                                                <div class="ml-3 flex items-center h-5">
-                                                                    <input v-model="form.wilSportAbonnement" id="wilSportAbonnement" type="checkbox" class="focus:ring-green-500 h-4 w-4 text-green-600 cursor-pointer border-gray-300 rounded">
-                                                                </div>
-                                                            </div>
-                                                        </div>
-                                                        <div class="flex-1 pl-3">
-                                                            <div class="relative flex items-start py-1">
-                                                                <div class="min-w-0 flex-1 text-sm">
-                                                                    <label for="wilE_Bike" class="text-gray-700 select-none cursor-pointer" :class="{ 'text-blue-500': form.wilE_Bike }">E-Bike</label>
-                                                                </div>
-                                                                <div class="ml-3 flex items-center h-5">
-                                                                    <input v-model="form.wilE_Bike" id="wilE_Bike" type="checkbox" class="focus:ring-green-500 h-4 w-4 text-green-600 cursor-pointer border-gray-300 rounded">
-                                                                </div>
-                                                            </div>
-                                                            <div class="relative flex items-start py-1">
-                                                                <div class="min-w-0 flex-1 text-sm">
-                                                                    <label for="wilExtra_Fietsplek" class="text-gray-700 select-none cursor-pointer" :class="{ 'text-blue-500': form.wilExtra_Fietsplek }">Fietsplek</label>
-                                                                </div>
-                                                                <div class="ml-3 flex items-center h-5">
-                                                                    <input v-model="form.wilExtra_Fietsplek" id="wilExtra_Fietsplek" type="checkbox" class="focus:ring-green-500 h-4 w-4 text-green-600 cursor-pointer border-gray-300 rounded">
-                                                                </div>
-                                                            </div>
-                                                            <div class="relative flex items-start py-1">
-                                                                <div class="min-w-0 flex-1 text-sm">
-                                                                    <label for="wilScooterplek" class="text-gray-700 select-none cursor-pointer" :class="{ 'text-blue-500': form.wilScooterplek }">Scooterplek</label>
-                                                                </div>
-                                                                <div class="ml-3 flex items-center h-5">
-                                                                    <input v-model="form.wilScooterplek" id="wilScooterplek" type="checkbox" class="focus:ring-green-500 h-4 w-4 text-green-600 cursor-pointer border-gray-300 rounded">
-                                                                </div>
-                                                            </div>
-                                                            <div class="relative flex items-start py-1">
-                                                                <div class="min-w-0 flex-1 text-sm">
-                                                                    <label for="wilMotorplek" class="text-gray-700 select-none cursor-pointer" :class="{ 'text-blue-500': form.wilMotorplek }">Motorplek</label>
-                                                                </div>
-                                                                <div class="ml-3 flex items-center h-5">
-                                                                    <input v-model="form.wilMotorplek" id="wilMotorplek" type="checkbox" class="focus:ring-green-500 h-4 w-4 text-green-600 cursor-pointer border-gray-300 rounded">
-                                                                </div>
-                                                            </div>
-                                                            <div class="relative flex items-start py-1">
-                                                                <div class="min-w-0 flex-1 text-sm">
-                                                                    <label for="roker" class="text-gray-700 select-none cursor-pointer" :class="{ 'text-blue-500': form.roker }">Roker</label>
-                                                                </div>
-                                                                <div class="ml-3 flex items-center h-5">
-                                                                    <input v-model="form.roker" id="roker" type="checkbox" class="focus:ring-green-500 h-4 w-4 text-green-600 cursor-pointer border-gray-300 rounded">
-                                                                </div>
-                                                            </div>
-                                                        </div>
+                                                    <div>
+                                                        <p class="font-bold mt-1">{{ person.naam }}</p>
+                                                        <a class="text-blue-600 text-sm" :href="'mailto:'+person.email">{{ person.email }}</a>
                                                     </div>
-
-                                                    <h3 class="text-lg font-medium text-gray-900 mb-1 bg-gray-100 px-6 py-4 mb-2 mt-8"><span class="text-blue-600">3.</span> Studio bepaling</h3>
-                                                    <div class="px-6 mb-3">
-                                                        <label class="block text-sm font-medium text-gray-700">
-                                                            Studio voorkeur
-                                                        </label>
-                                                        <input v-model="form.preferredUnit" type="text" class="mb-2 shadow-sm p-2 focus:ring-indigo-500 focus:border-indigo-500 mt-1 block w-full sm:text-sm border border-gray-300 rounded-md" />
-                                                    </div>
-
-                                                    <h3 class="text-lg font-medium text-gray-900 mb-1 bg-gray-100 px-6 py-4 mb-2 mt-8"><span class="text-blue-600">4.</span> Verslag</h3>
-                                                    <div class="px-6 mb-3">
-                                                        <label class="block text-sm font-medium text-gray-700">
-                                                            Verslag
-                                                        </label>
-                                                        <div class="mt-1 mb-3">
-                                                            <textarea v-model="form.report" rows="6" class="shadow-sm p-3 focus:ring-indigo-500 focus:border-indigo-500 mt-1 block w-full sm:text-sm border border-gray-300 rounded-md"></textarea>
-                                                        </div>
-
-                                                        <label class="block text-sm font-medium text-gray-700">
-                                                            Beoordeling Bewonersapp
-                                                        </label>
-                                                        <div class="mt-1">
-                                                            <textarea v-model="form.reportApp" rows="3" class="shadow-sm p-3 focus:ring-indigo-500 focus:border-indigo-500 mt-1 block w-full sm:text-sm border border-gray-300 rounded-md"></textarea>
-                                                        </div>
-                                                    </div>
-
-                                                    <h3 class="text-lg font-medium text-gray-900 mb-1 bg-gray-100 px-6 py-4 mb-2 mt-8"><span class="text-blue-600">5.</span> Afronden</h3>
-
-                                                    <div class="px-6 mb-6">
-                                                        <label  class="block text-sm font-medium text-gray-700">Match</label>
-                                                        <select v-model="form.match" name="location" class="mb-4 shadow-sm p-2 focus:ring-indigo-500 focus:border-indigo-500 mt-1 block w-full sm:text-sm border border-gray-300 rounded-md">
-                                                            <option value="" disabled selected>Selecteer een match score</option>
-                                                            <option v-for="option in meta.match" :value="option">{{ option }}</option>
-                                                        </select>
-
-                                                        <label  class="block text-sm font-medium text-gray-700">Case handler</label>
-                                                        <select v-model="form.handler" name="location" class="mb-2 shadow-sm p-2 focus:ring-indigo-500 focus:border-indigo-500 mt-1 block w-full sm:text-sm border border-gray-300 rounded-md">
-                                                            <option value="" disabled selected>Selecteer een handler</option>
-                                                            <option v-for="option in meta.handler" :value="option">{{ option }}</option>
-                                                        </select>
-                                                    </div>
-
-                                                    <div class="px-6 mb-4" v-if="errors.length">
-                                                        <p class="font-medium">Fouten gevonden in formulier:</p>
-                                                        <ul>
-                                                            <li v-for="error in errors" class="text-red-600 text-sm">{{ error }}</li>
-                                                        </ul>
-                                                    </div>
-
-                                                    <div class="px-6 inline-block">
-                                                        <button @click="setSlideScreen('info')" type="button" class="mb-5 inline-flex items-center px-4 py-2 border border-gray-300 shadow-sm text-sm font-medium rounded-md text-gray-700 bg-white hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500">
-                                                            Terug
-                                                        </button>
-<!--                                                        <button @click="sendReport" type="button" class="mb-5 inline-flex items-center px-4 py-2 border border-gray-300 shadow-sm text-sm font-medium rounded-md text-gray-700 bg-white hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500">-->
-<!--                                                            Afronden-->
-<!--                                                        </button>-->
-                                                        <button @click="sendReport" type="button" class="inline-flex items-center px-3 py-2 border border-transparent text-sm leading-4 font-medium rounded-md shadow-sm text-white bg-blue-theme hover:bg-blue-theme focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500">
-                                                            Indienen
-                                                        </button>
-                                                        <span v-if="loading">
-                                                            <div class="spinner-border -mt-3 ml-2 mr-1 animate-spin inline-block w-6 h-6 border-4 rounded-full" role="status" style="border-right-color: #2C55A2"></div>
-                                                            Loading ...
-                                                        </span>
-                                                    </div>
-
                                                 </div>
+                                            </div>
+                                            <div>
+                                                <hr class="mb-2">
+
+                                                <div class="grid grid-cols-2">
+                                                    <div class="flex-1 mb-3 px-6">
+                                                        <dt class="text-sm font-medium text-gray-500">
+                                                            Inschrijfnummer
+                                                        </dt>
+                                                        <dd class="mt-1 text-sm text-gray-900 text-gray-900">
+                                                            {{ person.inschrijfnummer }}
+                                                        </dd>
+                                                    </div>
+                                                    <div class="flex-1 mb-3 px-6">
+                                                        <dt class="text-sm font-medium text-gray-500">
+                                                            BSN-nummer
+                                                        </dt>
+                                                        <dd class="mt-1 text-sm text-gray-900 text-gray-900">
+                                                            {{ person.BSN }}
+                                                        </dd>
+                                                    </div>
+                                                </div>
+                                                <div class="grid grid-cols-2">
+                                                    <div class="flex-1 mb-3 px-6">
+                                                        <dt class="text-sm font-medium text-gray-500">
+                                                            Beroep
+                                                        </dt>
+                                                        <dd class="mt-1 text-sm text-gray-900 text-gray-900">
+                                                            {{ person.beroep }}
+                                                        </dd>
+                                                    </div>
+                                                    <div class="flex-1 mb-3 px-6">
+                                                        <dt class="text-sm font-medium text-gray-500">
+                                                            Opleiding
+                                                        </dt>
+                                                        <dd class="mt-1 text-sm text-gray-900 text-gray-900">
+                                                            {{ person.opleiding }}
+                                                        </dd>
+                                                    </div>
+                                                </div>
+
+                                                <div class="grid grid-cols-2">
+                                                    <div class="flex-1 mb-3 px-6">
+                                                        <dt class="text-sm font-medium text-gray-500">
+                                                            Telefoon
+                                                        </dt>
+                                                        <a :href="'tel:'+person.telefoon" class="mt-1 text-sm text-blue-600 hover:text-blue-800 text-gray-900">
+                                                            {{ person.telefoon }}
+                                                        </a>
+                                                    </div>
+                                                    <div class="flex-1 mb-3 px-6">
+                                                        <dt class="text-sm font-medium text-gray-500">
+                                                            Mobiel
+                                                        </dt>
+                                                        <a :href="'tel:'+person.mobiel" class="mt-1 text-sm text-blue-600 hover:text-blue-800 text-gray-900">
+                                                            {{ person.mobiel }}
+                                                        </a>
+                                                    </div>
+                                                </div>
+
+                                                <hr class="mb-2">
+
+                                                <div class="grid grid-cols-1">
+                                                    <div class="flex-1 mb-3 px-6">
+                                                        <dt class="text-sm font-medium text-gray-500">
+                                                            Voorkeuren
+                                                        </dt>
+                                                        <dd class="mt-1 text-sm text-gray-900 text-gray-900">
+
+                                                            <div class="grid grid-cols-2">
+                                                                <div class="flex-1 border-r border-gray-200">
+                                                                    <div>
+                                                                        <svg v-show="person.wilBerging" xmlns="http://www.w3.org/2000/svg" class="-mt-1 h-5 w-5 text-green-600 inline-block" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                                                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" />
+                                                                        </svg>
+                                                                        <svg v-show="!person.wilBerging" xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 -mt-1 inline-block text-gray-400" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                                                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" />
+                                                                        </svg>
+                                                                        Berging
+                                                                    </div>
+                                                                    <div>
+                                                                        <svg v-show="person.wilDeelAuto" xmlns="http://www.w3.org/2000/svg" class="-mt-1 h-5 w-5 text-green-600 inline-block" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                                                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" />
+                                                                        </svg>
+                                                                        <svg v-show="!person.wilDeelAuto" xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 -mt-1 inline-block text-gray-400" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                                                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" />
+                                                                        </svg>
+                                                                        Deelauto
+                                                                    </div>
+                                                                    <div>
+                                                                        <svg v-show="person.wilParkeerplaats" xmlns="http://www.w3.org/2000/svg" class="-mt-1 h-5 w-5 text-green-600 inline-block" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                                                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" />
+                                                                        </svg>
+                                                                        <svg v-show="!person.wilParkeerplaats" xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 -mt-1 inline-block text-gray-400" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                                                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" />
+                                                                        </svg>
+                                                                        Parkeerplaats
+                                                                    </div>
+                                                                    <div>
+                                                                        <svg v-show="person.wilParkeerplaatsElektrisch" xmlns="http://www.w3.org/2000/svg" class="-mt-1 h-5 w-5 text-green-600 inline-block" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                                                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" />
+                                                                        </svg>
+                                                                        <svg v-show="!person.wilParkeerplaatsElektrisch" xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 -mt-1 inline-block text-gray-400" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                                                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" />
+                                                                        </svg>
+                                                                        Elekertische parkeerplaats
+                                                                    </div>
+                                                                    <div>
+                                                                        <svg v-show="person.wilSamenwonen" xmlns="http://www.w3.org/2000/svg" class="-mt-1 h-5 w-5 text-green-600 inline-block" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                                                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" />
+                                                                        </svg>
+                                                                        <svg v-show="!person.wilSamenwonen" xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 -mt-1 inline-block text-gray-400" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                                                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" />
+                                                                        </svg>
+                                                                        Samenwonen
+                                                                    </div>
+                                                                    <div>
+                                                                        <svg v-show="person.wilSportAbonnement" xmlns="http://www.w3.org/2000/svg" class="-mt-1 h-5 w-5 text-green-600 inline-block" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                                                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" />
+                                                                        </svg>
+                                                                        <svg v-show="!person.wilSportAbonnement" xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 -mt-1 inline-block text-gray-400" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                                                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" />
+                                                                        </svg>
+                                                                        Sport abonnement
+                                                                    </div>
+                                                                </div>
+                                                                <div class="flex-1 pl-3">
+                                                                    <div>
+                                                                        <svg v-show="person.wilE_Bike" xmlns="http://www.w3.org/2000/svg" class="-mt-1 h-5 w-5 text-green-600 inline-block" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                                                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" />
+                                                                        </svg>
+                                                                        <svg v-show="!person.wilE_Bike" xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 -mt-1 inline-block text-gray-400" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                                                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" />
+                                                                        </svg>
+                                                                        E-Bike
+                                                                    </div>
+                                                                    <div>
+                                                                        <svg v-show="person.wilExtra_Fietsplek" xmlns="http://www.w3.org/2000/svg" class="-mt-1 h-5 w-5 text-green-600 inline-block" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                                                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" />
+                                                                        </svg>
+                                                                        <svg v-show="!person.wilExtra_Fietsplek" xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 -mt-1 inline-block text-gray-400" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                                                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" />
+                                                                        </svg>
+                                                                        Extra Fietsplek
+                                                                    </div>
+                                                                    <div>
+                                                                        <svg v-show="person.wilScooterplek" xmlns="http://www.w3.org/2000/svg" class="-mt-1 h-5 w-5 text-green-600 inline-block" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                                                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" />
+                                                                        </svg>
+                                                                        <svg v-show="!person.wilScooterplek" xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 -mt-1 inline-block text-gray-400" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                                                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" />
+                                                                        </svg>
+                                                                        Scooterplek
+                                                                    </div>
+                                                                    <div>
+                                                                        <svg v-show="person.wilMotorplek" xmlns="http://www.w3.org/2000/svg" class="-mt-1 h-5 w-5 text-green-600 inline-block" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                                                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" />
+                                                                        </svg>
+                                                                        <svg v-show="!person.wilMotorplek" xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 -mt-1 inline-block text-gray-400" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                                                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" />
+                                                                        </svg>
+                                                                        Motorplek
+                                                                    </div>
+                                                                    <div>
+                                                                        <svg v-show="person.roker" xmlns="http://www.w3.org/2000/svg" class="-mt-1 h-5 w-5 text-green-600 inline-block" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                                                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" />
+                                                                        </svg>
+                                                                        <svg v-show="!person.roker" xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 -mt-1 inline-block text-gray-400" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                                                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" />
+                                                                        </svg>
+                                                                        Roker
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                        </dd>
+                                                    </div>
+                                                </div>
+
+                                                <hr class="mb-2">
+
+                                                <div class="grid grid-cols-1">
+                                                    <div class="flex-1 mb-3 px-6">
+                                                        <dt class="text-sm font-medium text-gray-500">
+                                                            Motivatie
+                                                        </dt>
+                                                        <dd class="mt-1 text-sm text-gray-900 text-gray-900">
+                                                            {{ person.motivatie }}
+                                                        </dd>
+                                                    </div>
+                                                </div>
+
+                                                <hr class="mb-2">
+
+                                                <div class="grid grid-cols-1">
+                                                    <div class="flex-1 mb-3 px-6">
+                                                        <dt class="text-sm font-medium text-gray-500">
+                                                            Afronden
+                                                        </dt>
+                                                        <dd class="mt-1">
+                                                            <button @click.prevent="setSlideScreen('rapport')" type="button" class="mt-1 inline-flex items-center px-4 py-2 border border-transparent text-sm font-medium rounded-md shadow-sm text-white bg-blue-theme hover:bg-blue-800 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500">
+                                                                Rapport opstellen
+                                                            </button>
+                                                        </dd>
+                                                    </div>
+                                                </div>
+
                                             </div>
                                         </div>
 
+                                        <div v-if="views.startupMessage" class="text-center mx-5 text-sm text-gray-500 p-5 bg-gray-100 rounded">
+                                            Zoek een persoon op inschrijfnummer of emailadres
+                                        </div>
+
+                                        <div v-if="error !== null" class="text-center mx-5 text-sm text-red-800 p-5 bg-red-50 rounded">
+                                            {{ error }}
+                                        </div>
+                                    </div>
+                                    <div v-if="slide.screen === 'rapport'">
+                                        <h3 class="text-2xl font-bold mb-4 px-6">Rapport opstellen</h3>
+
+                                        <div class="sm:overflow-hidden">
+                                            <div>
+                                                <h3 class="text-lg font-medium text-gray-900 mb-1 bg-gray-100 px-6 py-4 mb-2"><span class="text-blue-600">1.</span> BSN controle</h3>
+                                                <div class="px-6 mb-3">
+                                                    <div class="mt-1">
+                                                    <label class="block text-sm font-medium text-gray-700">
+                                                        BSN-nummer
+                                                    </label>
+                                                        <input v-model="form.BSN" @change="checkBSN" type="text" class="mb-2 shadow-sm p-2 focus:ring-indigo-500 focus:border-indigo-500 mt-1 block w-full sm:text-sm border border-gray-300 rounded-md" />
+
+                                                    <label class="block text-sm font-medium text-gray-700">
+                                                        Nogmaals ter controle
+                                                    </label>
+                                                        <input v-model="form.BSN_check" @keyup="checkBSN" type="text" class="mb-3 shadow-sm p-2 focus:ring-indigo-500 focus:border-indigo-500 mt-1 block w-full sm:text-sm border border-gray-300 rounded-md" />
+
+                                                        <p v-if="formChecks.BSN" class="text-green-500 text-sm">
+                                                            <svg v-if="formChecks.BSN" xmlns="http://www.w3.org/2000/svg" class="-mt-1 h-4 w-4 inline-block" viewBox="0 0 20 20" fill="currentColor">
+                                                                <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd" />
+                                                            </svg>
+                                                            BSN gecontroleerd
+                                                        </p>
+                                                    </div>
+                                                </div>
+
+                                                <h3 class="text-lg font-medium text-gray-900 mb-1 bg-gray-100 px-6 py-4 mb-2 mt-8"><span class="text-blue-600">2.</span> Voorkeuren</h3>
+                                                <div class="px-6 mb-3 grid grid-cols-2">
+                                                    <div class="flex-1 pr-3 border-r border-gray-200">
+                                                        <div class="relative flex items-start py-1">
+                                                            <div class="min-w-0 flex-1 text-sm">
+                                                                <label for="wilBerging" class="text-gray-700 select-none cursor-pointer" :class="{ 'text-blue-500': form.wilBerging }">Berging</label>
+                                                            </div>
+                                                            <div class="ml-3 flex items-center h-5">
+                                                                <input v-model="form.wilBerging" id="wilBerging" type="checkbox" class="focus:ring-green-500 h-4 w-4 text-green-600 cursor-pointer border-gray-300 rounded">
+                                                            </div>
+                                                        </div>
+                                                        <div class="relative flex items-start py-1">
+                                                            <div class="min-w-0 flex-1 text-sm">
+                                                                <label for="wilDeelAuto" class="text-gray-700 select-none cursor-pointer" :class="{ 'text-blue-500': form.wilDeelAuto }">Deelauto</label>
+                                                            </div>
+                                                            <div class="ml-3 flex items-center h-5">
+                                                                <input v-model="form.wilDeelAuto" id="wilDeelAuto" type="checkbox" class="focus:ring-green-500 h-4 w-4 text-green-600 cursor-pointer border-gray-300 rounded">
+                                                            </div>
+                                                        </div>
+                                                        <div class="relative flex items-start py-1">
+                                                            <div class="min-w-0 flex-1 text-sm">
+                                                                <label for="wilParkeerplaats" class="text-gray-700 select-none cursor-pointer" :class="{ 'text-blue-500': form.wilParkeerplaats }">Parkeerplaats</label>
+                                                            </div>
+                                                            <div class="ml-3 flex items-center h-5">
+                                                                <input v-model="form.wilParkeerplaats" id="wilParkeerplaats" type="checkbox" class="focus:ring-green-500 h-4 w-4 text-green-600 cursor-pointer border-gray-300 rounded">
+                                                            </div>
+                                                        </div>
+                                                        <div class="relative flex items-start py-1">
+                                                            <div class="min-w-0 flex-1 text-sm">
+                                                                <label for="wilParkeerplaatsElektrisch" class="text-gray-700 select-none cursor-pointer" :class="{ 'text-blue-500': form.wilParkeerplaatsElektrisch }">Parkeerplaats Elektrisch</label>
+                                                            </div>
+                                                            <div class="ml-3 flex items-center h-5">
+                                                                <input v-model="form.wilParkeerplaatsElektrisch" id="wilParkeerplaatsElektrisch" type="checkbox" class="focus:ring-green-500 h-4 w-4 text-green-600 cursor-pointer border-gray-300 rounded">
+                                                            </div>
+                                                        </div>
+                                                        <div class="relative flex items-start py-1">
+                                                            <div class="min-w-0 flex-1 text-sm">
+                                                                <label for="wilSamenwonen" class="text-gray-700 select-none cursor-pointer" :class="{ 'text-blue-500': form.wilSamenwonen }">Samenwonen</label>
+                                                            </div>
+                                                            <div class="ml-3 flex items-center h-5">
+                                                                <input v-model="form.wilSamenwonen" id="wilSamenwonen" type="checkbox" class="focus:ring-green-500 h-4 w-4 text-green-600 cursor-pointer border-gray-300 rounded">
+                                                            </div>
+                                                        </div>
+                                                        <div class="relative flex items-start py-1">
+                                                            <div class="min-w-0 flex-1 text-sm">
+                                                                <label for="wilSportAbonnement" class="text-gray-700 select-none cursor-pointer" :class="{ 'text-blue-500': form.wilSportAbonnement }">Sportabonnement</label>
+                                                            </div>
+                                                            <div class="ml-3 flex items-center h-5">
+                                                                <input v-model="form.wilSportAbonnement" id="wilSportAbonnement" type="checkbox" class="focus:ring-green-500 h-4 w-4 text-green-600 cursor-pointer border-gray-300 rounded">
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <div class="flex-1 pl-3">
+                                                        <div class="relative flex items-start py-1">
+                                                            <div class="min-w-0 flex-1 text-sm">
+                                                                <label for="wilE_Bike" class="text-gray-700 select-none cursor-pointer" :class="{ 'text-blue-500': form.wilE_Bike }">E-Bike</label>
+                                                            </div>
+                                                            <div class="ml-3 flex items-center h-5">
+                                                                <input v-model="form.wilE_Bike" id="wilE_Bike" type="checkbox" class="focus:ring-green-500 h-4 w-4 text-green-600 cursor-pointer border-gray-300 rounded">
+                                                            </div>
+                                                        </div>
+                                                        <div class="relative flex items-start py-1">
+                                                            <div class="min-w-0 flex-1 text-sm">
+                                                                <label for="wilExtra_Fietsplek" class="text-gray-700 select-none cursor-pointer" :class="{ 'text-blue-500': form.wilExtra_Fietsplek }">Fietsplek</label>
+                                                            </div>
+                                                            <div class="ml-3 flex items-center h-5">
+                                                                <input v-model="form.wilExtra_Fietsplek" id="wilExtra_Fietsplek" type="checkbox" class="focus:ring-green-500 h-4 w-4 text-green-600 cursor-pointer border-gray-300 rounded">
+                                                            </div>
+                                                        </div>
+                                                        <div class="relative flex items-start py-1">
+                                                            <div class="min-w-0 flex-1 text-sm">
+                                                                <label for="wilScooterplek" class="text-gray-700 select-none cursor-pointer" :class="{ 'text-blue-500': form.wilScooterplek }">Scooterplek</label>
+                                                            </div>
+                                                            <div class="ml-3 flex items-center h-5">
+                                                                <input v-model="form.wilScooterplek" id="wilScooterplek" type="checkbox" class="focus:ring-green-500 h-4 w-4 text-green-600 cursor-pointer border-gray-300 rounded">
+                                                            </div>
+                                                        </div>
+                                                        <div class="relative flex items-start py-1">
+                                                            <div class="min-w-0 flex-1 text-sm">
+                                                                <label for="wilMotorplek" class="text-gray-700 select-none cursor-pointer" :class="{ 'text-blue-500': form.wilMotorplek }">Motorplek</label>
+                                                            </div>
+                                                            <div class="ml-3 flex items-center h-5">
+                                                                <input v-model="form.wilMotorplek" id="wilMotorplek" type="checkbox" class="focus:ring-green-500 h-4 w-4 text-green-600 cursor-pointer border-gray-300 rounded">
+                                                            </div>
+                                                        </div>
+                                                        <div class="relative flex items-start py-1">
+                                                            <div class="min-w-0 flex-1 text-sm">
+                                                                <label for="roker" class="text-gray-700 select-none cursor-pointer" :class="{ 'text-blue-500': form.roker }">Roker</label>
+                                                            </div>
+                                                            <div class="ml-3 flex items-center h-5">
+                                                                <input v-model="form.roker" id="roker" type="checkbox" class="focus:ring-green-500 h-4 w-4 text-green-600 cursor-pointer border-gray-300 rounded">
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+
+                                                <h3 class="text-lg font-medium text-gray-900 mb-1 bg-gray-100 px-6 py-4 mb-2 mt-8"><span class="text-blue-600">3.</span> Studio bepaling</h3>
+                                                <div class="px-6 mb-3">
+                                                    <label class="block text-sm font-medium text-gray-700">
+                                                        Studio voorkeur
+                                                    </label>
+                                                    <input v-model="form.preferredUnit" type="text" class="mb-2 shadow-sm p-2 focus:ring-indigo-500 focus:border-indigo-500 mt-1 block w-full sm:text-sm border border-gray-300 rounded-md" />
+                                                </div>
+
+                                                <h3 class="text-lg font-medium text-gray-900 mb-1 bg-gray-100 px-6 py-4 mb-2 mt-8"><span class="text-blue-600">4.</span> Verslag</h3>
+                                                <div class="px-6 mb-3">
+                                                    <label class="block text-sm font-medium text-gray-700">
+                                                        Verslag
+                                                    </label>
+                                                    <div class="mt-1 mb-3">
+                                                        <textarea v-model="form.report" rows="6" class="shadow-sm p-3 focus:ring-indigo-500 focus:border-indigo-500 mt-1 block w-full sm:text-sm border border-gray-300 rounded-md"></textarea>
+                                                    </div>
+
+                                                    <label class="block text-sm font-medium text-gray-700">
+                                                        Beoordeling Bewonersapp
+                                                    </label>
+                                                    <div class="mt-1">
+                                                        <textarea v-model="form.reportApp" rows="3" class="shadow-sm p-3 focus:ring-indigo-500 focus:border-indigo-500 mt-1 block w-full sm:text-sm border border-gray-300 rounded-md"></textarea>
+                                                    </div>
+                                                </div>
+
+                                                <h3 class="text-lg font-medium text-gray-900 mb-1 bg-gray-100 px-6 py-4 mb-2 mt-8"><span class="text-blue-600">5.</span> Afronden</h3>
+
+                                                <div class="px-6 mb-6">
+                                                    <label  class="block text-sm font-medium text-gray-700">Match</label>
+                                                    <select v-model="form.match" name="location" class="mb-4 shadow-sm p-2 focus:ring-indigo-500 focus:border-indigo-500 mt-1 block w-full sm:text-sm border border-gray-300 rounded-md">
+                                                        <option value="" disabled selected>Selecteer een match score</option>
+                                                        <option v-for="option in meta.match" :value="option">{{ option }}</option>
+                                                    </select>
+
+                                                    <label  class="block text-sm font-medium text-gray-700">Case handler</label>
+                                                    <select v-model="form.handler" name="location" class="mb-2 shadow-sm p-2 focus:ring-indigo-500 focus:border-indigo-500 mt-1 block w-full sm:text-sm border border-gray-300 rounded-md">
+                                                        <option value="" disabled selected>Selecteer een handler</option>
+                                                        <option v-for="option in meta.handler" :value="option">{{ option }}</option>
+                                                    </select>
+                                                </div>
+
+                                                <div class="px-6 mb-4" v-if="errors.length">
+                                                    <p class="font-medium">Fouten gevonden in formulier:</p>
+                                                    <ul>
+                                                        <li v-for="error in errors" class="text-red-600 text-sm">{{ error }}</li>
+                                                    </ul>
+                                                </div>
+
+                                                <div class="px-6 inline-block">
+                                                    <button @click="setSlideScreen('info')" type="button" class="mb-5 inline-flex items-center px-4 py-2 border border-gray-300 shadow-sm text-sm font-medium rounded-md text-gray-700 bg-white hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500">
+                                                        Terug
+                                                    </button>
+                                                    <button @click="sendReport" type="button" class="inline-flex items-center px-3 py-2 border border-transparent text-sm leading-4 font-medium rounded-md shadow-sm text-white bg-blue-theme hover:bg-blue-theme focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500">
+                                                        Indienen
+                                                    </button>
+                                                    <span v-if="loading">
+                                                        <div class="spinner-border -mt-3 ml-2 mr-1 animate-spin inline-block w-6 h-6 border-4 rounded-full" role="status" style="border-right-color: #2C55A2"></div>
+                                                        Loading ...
+                                                    </span>
+                                                </div>
+
+                                            </div>
+                                        </div>
                                     </div>
                                 </div>
 
@@ -464,12 +475,31 @@
                                     <hr class="mb-2">
 
                                     <div class="sm:col-span-1 mb-3 px-6">
-                                        <dt class="text-sm font-medium text-gray-500">
-                                            Status
-                                        </dt>
-                                        <dd class="mt-1 text-sm text-gray-900 text-green-700" :class="unit.Status">
+                                        <dt class="text-sm font-medium text-gray-500">Status</dt>
+                                        <dd v-if="slide.studio.state === 'default'" class="mt-1 text-sm text-gray-900 text-green-700" :class="unit.Status">
                                             {{ unit.Status }}
                                         </dd>
+                                        <dd v-else-if="slide.studio.state === 'edit'" class="mt-1 text-sm text-gray-900 text-green-700" :class="unit.Status">
+                                            <select v-model="slide.studio.unit.status" name="location" class="mb-4 shadow-sm p-2 focus:ring-indigo-500 focus:border-indigo-500 mt-1 block w-full sm:text-sm border border-gray-300 rounded-md">
+                                                <option value="" disabled selected>Selecteer een status</option>
+                                                <option v-for="option in meta.unitStatus" :value="option">{{ option }}</option>
+                                            </select>
+                                        </dd>
+
+                                        <div class="mt-3">
+                                            <dt class="text-sm font-medium text-gray-500 mb-2.5">Geselecteerd persoon</dt>
+
+                                            <dd v-if="person.naam" class="text-sm font-medium">
+                                                <span class="inline-flex items-center pl-1 pr-2 py-0.5 rounded-full text-xs font-medium bg-green-100 text-green-800 capitalize">
+                                                  <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 mr-1" viewBox="0 0 20 20" fill="currentColor">
+  <path fill-rule="evenodd" d="M18 10a8 8 0 11-16 0 8 8 0 0116 0zm-6-3a2 2 0 11-4 0 2 2 0 014 0zm-2 4a5 5 0 00-4.546 2.916A5.986 5.986 0 0010 16a5.986 5.986 0 004.546-2.084A5 5 0 0010 11z" clip-rule="evenodd" />
+</svg>
+                                                    {{ person.naam }}
+                                                </span>
+
+                                            </dd>
+                                            <dd v-else class="text-sm text-gray-500">Zoek eerst een persoon via de search bar.</dd>
+                                        </div>
                                     </div>
 
                                     <hr class="mb-2">
@@ -530,8 +560,26 @@
 
                                     <hr class="mb-2">
 
-                                </div>
+                                    <div v-if="user.email === 'ict@change-is.com'" class="mt-4 px-6">
+                                        <button v-show="slide.studio.state === 'default'" @click="syncFormValues(); slide.studio.state = 'edit'" type="button" class="inline-flex items-center px-3 py-2 border border-gray-300 shadow-sm text-sm leading-4 font-medium rounded-md text-gray-700 bg-white hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500">
+                                            Bewerken
+                                        </button>
 
+                                        <div v-show="slide.studio.state === 'edit'">
+                                            <button @click="slide.studio.state = 'default'" type="button" class="mb-5 inline-flex items-center px-4 py-2 border border-gray-300 shadow-sm text-sm font-medium rounded-md text-gray-700 bg-white hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500">
+                                                Annuleren
+                                            </button>
+                                            <button @click="saveUnit" type="button" class="inline-flex items-center px-3 py-2 border border-transparent text-sm leading-4 font-medium rounded-md shadow-sm text-white bg-blue-theme hover:bg-blue-theme focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500">
+                                                Opslaan
+                                            </button>
+                                            <span v-if="loading">
+                                            <div class="spinner-border -mt-3 ml-2 mr-1 animate-spin inline-block w-6 h-6 border-4 rounded-full" role="status" style="border-right-color: #2C55A2"></div>
+                                            Loading ...
+                                        </span>
+                                        </div>
+                                    </div>
+
+                                </div>
                             </div>
                         </div>
                     </div>
@@ -542,6 +590,8 @@
 </template>
 
 <script>
+import {mapGetters} from "vuex";
+
 export default {
     name: "SlidePost",
     data() {
@@ -554,7 +604,13 @@ export default {
                 startupMessage: true
             },
             slide: {
-                screen: 'rapport'
+                screen: 'info',
+                studio: {
+                    state: 'default',
+                    unit: {
+                        status: this.unit.Status
+                    }
+                }
             },
             form: {
                 wilBerging: false,
@@ -583,25 +639,18 @@ export default {
             },
             errors: [],
             loading: false,
-            meta: {
-                match: [
-                    "Onvoldoende",
-                    "Voldoende",
-                    "Goed"
-                ],
-                handler: [
-                    "Channety W.",
-                    "Chermaine Z.",
-                    "Elysha R.",
-                    "Jay G.",
-                    "Judith P.",
-                    "Mishayne P.",
-                    "Lieke v.G."
-                ]
-            }
+            meta: [],
+            account: this.$store.state["cms/admin"]
         }
     },
     mounted() {
+        this.getMeta();
+    },
+    computed: {
+        ...mapGetters({
+            authenticated: "cms/authenticated",
+            user: "cms/admin",
+        }),
     },
     methods: {
         sendReport() {
@@ -672,6 +721,39 @@ export default {
                 });
             }
         },
+        async saveUnit() {
+            this.loading = true;
+
+            if(this.person.inschrijfnummer) {
+                let data = {
+                    location: this.location,
+                    unit: this.unit.ID,
+                    status: this.slide.studio.unit.status,
+                    account: this.person.inschrijfnummer
+                }
+
+                await axiosServices.post('/unitinformation', data)
+                    .then((res) => {
+                        this.$emit('refresh');
+                        this.hideSlide();
+                        this.$store.dispatch('cms/addNotification', {
+                            type: 'success',
+                            title: 'Unit bijgewerkt',
+                            timer: 2500
+                        });
+                    })
+                    .catch((err) => { console.log(err) })
+            } else {
+                this.$store.dispatch('cms/addNotification', {
+                    type: 'warning',
+                    title: 'Wijziging mislukt',
+                    message: 'Er is geen persoon geselecteerd. Zoek eerst een persoon in de zoekbalk en probeer dan opnieuw',
+                    timer: 4000
+                });
+            }
+
+            this.loading = false;
+        },
         hideSlide: function () {
             this.$emit('hide')
         },
@@ -690,7 +772,9 @@ export default {
         },
         syncFormValues() {
             let form = this.form,
-                person = this.person;
+                person = this.person,
+                unit = this.unit,
+                unitEdit = this.slide.studio.unit;
 
             // Voorkeuren
             form['wilBerging'] = person.wilBerging;
@@ -717,6 +801,9 @@ export default {
 
             // User
             form['inschrijfnummer'] = person.inschrijfnummer;
+
+            //
+            unitEdit['status'] = unit.Status;
         },
         getUserInfo() {
             axiosServices.get('/floorplan/accountinfo', {
@@ -740,9 +827,10 @@ export default {
                 this.views.startupMessage = false
             })
         },
-
         getMeta() {
-            axiosDev.get('')
+            axiosServices.get('/floorplan/accountpicklists')
+                .then((res) => { this.meta = res.data })
+                .catch((err) => { console.log(err) })
         }
     },
     props: ['unit', 'location', 'show']

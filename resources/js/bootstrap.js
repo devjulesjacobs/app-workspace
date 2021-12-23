@@ -21,6 +21,16 @@ window.axiosServices = axios.create({
     withCredentials: false,
 });
 
+// Change= Services API
+window.axiosStaff = axios.create({
+    baseURL: 'https://app.onthat.app/api',
+    auth: {
+        username: 'Change=ApiAccount',
+        password: 'dNYB72n!2@jd67!mcZ3'
+    },
+    withCredentials: false,
+});
+
 window.LoadingScreen = function (set) {
     const LoadingScreen = $('#LoadingScreen');
 

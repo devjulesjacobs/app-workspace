@@ -45,6 +45,8 @@
 
                                         <hr class="mb-5">
                                         <div v-if="views.person">
+
+
                                             <div class="mb-3 px-6">
                                                 <div class="flex">
                                                     <div class="mr-4 flex-shrink-0 self-center">
@@ -792,7 +794,7 @@ export default {
             form['handler'] = person.handler;
 
             // Unit
-            form['preferredUnit'] = person.preferredUnit;
+            form['preferredUnit'] = unit.ID
 
             // Other fields
             form['report'] = person.report;

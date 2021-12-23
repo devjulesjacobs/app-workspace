@@ -7,6 +7,11 @@
             </h3>
             <p class="ml-2 mt-1 text-sm text-gray-500 truncate">{{ im.location }}</p>
             <div class="mt-3 flex sm:mt-0 sm:ml-4">
+
+                <select v-model="im.floor" @change="getCoords" class="mr-3 cursor-pointer pl-3 pr-10 py-2 transition duration-100 ease-in-out border rounded shadow-sm focus:ring-2 focus:ring-blue-500 focus:outline-none focus:ring-opacity-50 disabled:opacity-50 disabled:cursor-not-allowed">
+                    <option v-for="floor in im.floors" :value="floor">Verdieping {{ floor }}</option>
+                </select>
+
                 <button @click="refreshCoords" type="button"
                         class="inline-flex items-center px-4 py-2 border border-gray-300 rounded-md shadow-sm text-sm font-medium text-gray-700 bg-white hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500">
                     Refresh
@@ -14,31 +19,18 @@
             </div>
         </div>
 
-        <div class="my-5">
-            <select v-model="im.floor" @change="getCoords" class="cursor-pointer pl-3 pr-10 py-2 transition duration-100 ease-in-out border rounded shadow-sm focus:ring-2 focus:ring-blue-500 focus:outline-none focus:ring-opacity-50 disabled:opacity-50 disabled:cursor-not-allowed">
-                <option value="-2">Verdieping -2</option>
-                <option value="-1">Verdieping -1</option>
-                <option value="0">Begane grond</option>
-                <option value="1">Verdieping 1</option>
-                <option value="2">Verdieping 2</option>
-                <option value="3">Verdieping 3</option>
-                <option value="4">Verdieping 4</option>
-                <option value="5">Verdieping 5</option>
-                <option value="6">Verdieping 6</option>
-                <option value="7">Verdieping 7</option>
-            </select>
-        </div>
-
-        <div id="floor-plan">
+        <div id="floor-plan" class="p-5">
 
             <div v-if="views.floorplan" class="floor-plan mb-10 m-auto">
                 <img :src="'/img/floorplans/ulr/Ulr-'+im.floor+'.png'" alt="" class="shadow-xl">
                 <div id="imagemap" class="imagemap">
+
                     <div v-for="c in im.coords" :key="c.ID" @click="getUnit(c.ID, im.location)" class="unit"
                          :class="c.Status"
                          :style="{ width: c.w+'px', height: c.h+'px', top: c.y+'px', left: c.x+'px' }">
                         <div class="text-temp text-sm font-bold">{{ c.Huisnummer }}</div>
                     </div>
+
                 </div>
             </div>
 
@@ -64,6 +56,7 @@ export default {
                 coords: null,
                 floor: 0,
                 floors: ['-2', '-1', '0', '1', '2', '3', '4', '5', '6', '7'],
+                scale: 1,
             },
             unit: [],
             views: {
@@ -113,8 +106,6 @@ export default {
         },
 
         getUnit(ID, location) {
-            this.slide.show = true;
-
             let config = {
                 params: {unit: ID, location: location}
             }
@@ -123,6 +114,7 @@ export default {
                 .then((res) => {
                     this.unit = res.data
                     this.$refs.myChild.syncFormValues();
+                    this.slide.show = true;
                 })
                 .catch((err) => { console.log(err) })
         },

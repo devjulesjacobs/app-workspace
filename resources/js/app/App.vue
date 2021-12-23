@@ -1,9 +1,6 @@
 <template>
     <div class="state-app">
-        <transition
-        mode="out-in"
-        enter-active-class="animate__animated animate__fadeIn animate__faster"
-        >
+        <transition mode="out-in" enter-active-class="animate__animated animate__fadeIn animate__faster">
             <router-view />
         </transition>
 

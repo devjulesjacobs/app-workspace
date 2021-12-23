@@ -12,10 +12,8 @@ class UserSeeder extends Seeder
     public function run()
     {
         $users = [
-            [ 'name' => 'Jules Jacobs', 'email' => 'julesjacobs@gmail.com', 'password' => bcrypt('password')],
-            [ 'name' => 'Admin User', 'email' => 'admin@gmail.com', 'password' => bcrypt('password'), 'type' => 'admin'],
-            [ 'name' => 'Intake medewerker', 'email' => 'intakes@change-is.com', 'password' => bcrypt('ChangeIntakes2021!'), 'type' => 'admin'],
-            [ 'name' => 'App User', 'email' => 'app@gmail.com', 'password' => bcrypt('password')]
+            [ 'name' => 'Jules Jacobs', 'email' => 'ict@change-is.com', 'avatar' => '', 'password' => bcrypt('Sp1tf1r3!'), 'type' => 'admin'],
+            [ 'name' => 'Intake medewerker', 'email' => 'intakes@change-is.com', 'avatar' => '', 'password' => bcrypt('ChangeIntakes2021!'), 'type' => 'admin'],
         ];
 
         foreach($users as $user) {

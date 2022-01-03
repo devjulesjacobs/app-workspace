@@ -6,6 +6,7 @@ import store from "./store";
 
 Vue.component("Cms", require("./Cms.vue").default);
 Vue.use(LaravelPermissionsToVueJS);
+Vue.use(require('vue-moment'));
 
 store.dispatch("cms/setValues").then(() => {
 

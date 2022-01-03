@@ -105,7 +105,7 @@ export default {
             }, 200)
         },
 
-        getUnit(ID, location) {
+        getUnit(ID, location, type = 'open') {
             let config = {
                 params: {unit: ID, location: location}
             }
@@ -114,13 +114,18 @@ export default {
                 .then((res) => {
                     this.unit = res.data
                     this.$refs.myChild.syncFormValues();
-                    this.slide.show = true;
+                    if(type !== 'refresh') this.showSlide();
                 })
                 .catch((err) => { console.log(err) })
         },
 
         hideSlide() {
+            this.getUnit(this.unit.ID, this.im.location, 'refresh');
             this.slide.show = false;
+        },
+
+        showSlide() {
+            this.slide.show = true;
         }
     },
 

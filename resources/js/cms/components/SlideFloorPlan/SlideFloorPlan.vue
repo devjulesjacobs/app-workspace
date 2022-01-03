@@ -508,6 +508,17 @@
 
                                     <div class="sm:col-span-1 mb-3 px-6">
                                         <dt class="text-sm font-medium text-gray-500">
+                                            Beschikbaar vanaf
+                                        </dt>
+                                        <dd class="mt-1 text-sm text-gray-900">
+                                            {{ unit.Available | moment('D MMM YYYY') }}
+                                        </dd>
+                                    </div>
+
+                                    <hr class="mb-2">
+
+                                    <div class="sm:col-span-1 mb-3 px-6">
+                                        <dt class="text-sm font-medium text-gray-500">
                                             Adres
                                         </dt>
                                         <dd class="mt-1 text-sm text-gray-900">
@@ -595,7 +606,7 @@
 import {mapGetters} from "vuex";
 
 export default {
-    name: "SlidePost",
+    name: "SlideFloorPlan",
     data() {
         return {
             search: '',
@@ -723,36 +734,28 @@ export default {
                 });
             }
         },
+
         async saveUnit() {
             this.loading = true;
 
-            if(this.person.inschrijfnummer) {
-                let data = {
-                    location: this.location,
-                    unit: this.unit.ID,
-                    status: this.slide.studio.unit.status,
-                    account: this.person.inschrijfnummer
-                }
-
-                await axiosServices.post('/unitinformation', data)
-                    .then((res) => {
-                        this.$emit('refresh');
-                        this.hideSlide();
-                        this.$store.dispatch('cms/addNotification', {
-                            type: 'success',
-                            title: 'Unit bijgewerkt',
-                            timer: 2500
-                        });
-                    })
-                    .catch((err) => { console.log(err) })
-            } else {
-                this.$store.dispatch('cms/addNotification', {
-                    type: 'warning',
-                    title: 'Wijziging mislukt',
-                    message: 'Er is geen persoon geselecteerd. Zoek eerst een persoon in de zoekbalk en probeer dan opnieuw',
-                    timer: 4000
-                });
+            let data = {
+                location: this.location,
+                unit: this.unit.ID,
+                status: this.slide.studio.unit.status,
+                account: this.person.inschrijfnummer ? this.person.inschrijfnummer : '',
             }
+
+            await axiosServices.post('/unitinformation', data)
+                .then((res) => {
+                    this.$emit('refresh');
+                    this.hideSlide();
+                    this.$store.dispatch('cms/addNotification', {
+                        type: 'success',
+                        title: 'Unit bijgewerkt',
+                        timer: 2500
+                    });
+                })
+                .catch((err) => { console.log(err) })
 
             this.loading = false;
         },
